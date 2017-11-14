@@ -1,0 +1,3 @@
+SECTION "Maps", ROM0
+
+MAP::
