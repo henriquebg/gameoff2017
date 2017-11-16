@@ -1,9 +1,9 @@
 SECTION "Character",ROM0
 
 INIT_CHARACTER::
-    ld a,$F0
+    ld a,$50
     ld [sprite_character],a
-    ld a,$0F
+    ld a,$48
     ld [sprite_character+1],a
     ld a,$00
     ld [sprite_character+2],a
@@ -11,28 +11,10 @@ INIT_CHARACTER::
     ld [sprite_character+3],a
     ret
 
-PLACE_CHARACTER::
-    ld a,$50
-    ld [sprite_character],a
-    ld a,$58
-    ld [sprite_character+1],a
-    ret
-
 UPDATE_CHARACTER::
     ld  a,[joypad_down]
     call JOY_A
     jp  nz,CHECK_UP
-    ; ld a,[atirando]
-    ; cp $01
-    ; jp  z,CHECK_UP
-    ; ld a,$01
-    ; ld [atirando],a
-    ; ld a,[sprite1_nave]
-    ; inc a
-    ; ld [sprite_tiro],a
-    ; ld a,[sprite1_nave+1]
-    ; ld [sprite_tiro+1],a
-    ; jp CHECK_UP
     ret
 
 CHECK_UP::

@@ -2,10 +2,11 @@ INCLUDE "constants.asm"
 INCLUDE "variables.asm"
 INCLUDE "header.asm"
 INCLUDE "util.asm"
-INCLUDE "background_map.asm"
+INCLUDE "maps.asm"
 INCLUDE "tiles_table.asm"
 INCLUDE "background_animation.asm"
 INCLUDE "character.asm"
+INCLUDE "enemies.asm"
 
 ;****************************************************************************************************************************************************
 ;*	Program Start
@@ -33,13 +34,17 @@ START::
 	ld	bc,6*16
     call LOAD_TILES
 
-    ld	hl,CHARACTER_TILES
+    ld	hl,SPRITES
 	ld	de,$8000
-	ld	bc,1*16
+	ld	bc,17*16
     call LOAD_TILES
 
     ld	de,_SCRN0	;where our map goes
     ld	hl,BGMAP	;our little map
+    call LOAD_MAP
+
+    ld	de,_SCRN1	;where our map goes
+    ld	hl,WINDOWMAP	;our little map
     call LOAD_MAP
 	
     ld	a,%11100100	;load a normal palette up 11 10 01 00 - dark->light
@@ -53,11 +58,8 @@ START::
     ldh [rLCDC],a
 
     call INIT_CHARACTER
-    call PLACE_CHARACTER
-    ld a,$00
-    ld [speed_anim_bg],a
-    ld [counter_anim_bg],a
-    ld [comecou],a
+    call INIT_ENEMIES
+    call INIT_BACKGROUND
     call DMA_COPY
     ei
 
@@ -66,6 +68,7 @@ LOOP::
     call BACKGROUND_ANIMATE
     call READ_JOYPAD
     call UPDATE_CHARACTER
+    call UPDATE_ENEMIES
     call $FF80
     nop
 	jp LOOP

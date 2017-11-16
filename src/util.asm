@@ -217,22 +217,6 @@ JOY_FALSE::
   ld  a,$0
   ret
 
-SCROLL_BACKGROUND::
-  ld a,[scroll_delay]
-  dec a
-  cp $00
-  jp nz,PULA_SCROLL
-  ld a,_SCROLL_DELAY
-  ld [scroll_delay],a
-  ld a,[rSCX]
-  inc a
-  ld [rSCX], a
-  ret
-
-PULA_SCROLL::
-  ld [scroll_delay],a
-  ret
-
 ;O registro c precisa ser carregado previamente $08 ~ 1s, $04 ~ 0.5s $0F ~ 2s... 
 ESPERA::
 ESPERA_LOOP_EXT2::

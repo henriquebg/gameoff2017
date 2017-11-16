@@ -1,5 +1,10 @@
 SECTION "Background Animation",ROM0
 
+INIT_BACKGROUND::
+    ld a,$00
+    ld [speed_anim_bg],a
+    ld [counter_anim_bg],a
+
 BACKGROUND_ANIMATE::
     ld a,[speed_anim_bg]
     cp $02
