@@ -217,42 +217,88 @@ JOY_FALSE::
   ld  a,$0
   ret
 
-;O registro c precisa ser carregado previamente $08 ~ 1s, $04 ~ 0.5s $0F ~ 2s... 
-ESPERA::
-ESPERA_LOOP_EXT2::
-    ld b,$64
-ESPERA_LOOP_EXT1::
+;Waits for bigger amount of times.
+;Register c needs to be loaded previously
+;Starts from ~ 0.125s -> ld c,$01
+;0.25s -> ld c,$02
+;0.5s -> ld c,$04
+;1s -> ld c,$08 and so on
+; WAIT_BIG::
+; WAIT_BIG_LOOP_EXT2::
+;     ld b,$64
+; WAIT_BIG_LOOP_EXT1::
+;     ld a,$FA
+; WAIT_BIG_LOOP_INT::
+;     dec a
+;     jp nz,WAIT_BIG_LOOP_INT
+;     dec b
+;     ld a,b
+;     jp nz,WAIT_BIG_LOOP_EXT1
+;     dec c
+;     ld a,c
+;     jp nz,WAIT_BIG_LOOP_EXT2
+;     ret
+
+;Waits for smaller amount of times.
+;Register c needs to be loaded previously
+;Starts from ~ 0.015s -> ld c,$01 ~ 1 frame
+;0.03s -> ld c,$02
+;0.06s -> ld c,$04
+;0.125s -> ld c,$08 and so on
+WAIT::
+WAIT_LOOP_EXT2::
+    ld b,$0C
+WAIT_LOOP_EXT1::
     ld a,$FA
-ESPERA_LOOP_INT::
+WAIT_LOOP_INT::
     dec a
-    jp nz,ESPERA_LOOP_INT
+    jp nz,WAIT_LOOP_INT
     dec b
     ld a,b
-    jp nz,ESPERA_LOOP_EXT1
+    jp nz,WAIT_LOOP_EXT1
     dec c
     ld a,c
-    jp nz,ESPERA_LOOP_EXT2
+    jp nz,WAIT_LOOP_EXT2
     ret
-  
+
+;Load previously into d the amount of time (using WAIT procedure) to use in each pallete change
 FADE_IN::
+  ld c,d
+  call WAIT
   ld	a,%01000000
 	ldh	[rBGP],a
-  ld	a,%00010000
-	ldh	[rOBP0],a
-  ld c,$04
-  call ESPERA
+  ld c,d
+  call WAIT
   ld	a,%10010000
 	ldh	[rBGP],a
-  ld	a,%00010000
-	ldh	[rOBP0],a
-  ld c,$04
-  call ESPERA
+  ld c,d
+  call WAIT
   ld	a,%11100100
 	ldh	[rBGP],a
-  ld	a,%00100111
-	ldh	[rOBP0],a
-  ld c,$04
-  call ESPERA
+  ld c,d
+  call WAIT
+  ret
+
+;Load previously into d the amount of time (using WAIT procedure) to use in each pallete change
+FADE_OUT::
+  ld c,d
+  call WAIT
+  ld	a,%11100100
+	ldh	[rBGP],a
+  ld c,d
+  call WAIT
+  ld	a,%10010000
+	ldh	[rBGP],a
+  ld c,d
+  call WAIT
+  ld	a,%01000000
+	ldh	[rBGP],a
+  ld c,d
+  call WAIT
+  ld	a,%00000000
+	ldh	[rBGP],a
+  ld c,d
+  call WAIT  
   ret
 
 ;Gera um número randômico a partir do scroll_x. O registro b precisa ser
