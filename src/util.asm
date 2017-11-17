@@ -261,7 +261,7 @@ FADE_IN::
 ;ld b,%00011111 resultará em um número entre 0 e 32
 ;ld b,%01111110 resultará em um número entre 2 e 128
 ;ld b,%11111100 resultará em um número entre 4 e 255
-NUMERO_RANDOMICO::
-  ld a,[rSCX]
+RAND_NUM::
+  ld a,[rTIMA]
   and b
   ret

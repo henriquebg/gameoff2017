@@ -6,9 +6,11 @@ INIT_ENEMIES::
 
 INIT_ENEMY_0::
     ;Setting initial position for enemy 0
-    ld a,56
+    ld b,%01111100
+    call RAND_NUM
     ld [enemy_0_y],a
-    ld a,72
+    ld b,%00111100
+    call RAND_NUM
     ld [enemy_0_x],a
     call UPDATE_ENEMY_0_POSITION
 
@@ -37,7 +39,7 @@ UPDATE_ENEMIES::
     ret
 
 UPDATE_ENEMY_0::
-    call MOVE_ENEMY_0
+    ;call MOVE_ENEMY_0
     call UPDATE_ENEMY_0_POSITION
     call UPDATE_ENEMY_0_SPRITE
     ret

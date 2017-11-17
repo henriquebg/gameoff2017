@@ -25,27 +25,32 @@ START::
     call CLEAR_OAM
     call CLEAR_RAM
 
-    ld	hl,BG0_0
-	ld	de,$9000
-	ld	bc,6*16
-    call LOAD_TILES
-    ld	hl,BG0_1
-	ld	de,$9084
-	ld	bc,6*16
+    ld	hl,SPLASH_TILES
+	ld	de,$8800
+	ld	bc,147*16
     call LOAD_TILES
 
-    ld	hl,SPRITES
-	ld	de,$8000
-	ld	bc,17*16
-    call LOAD_TILES
+    ; ld	hl,BG0_0
+	; ld	de,$9000
+	; ld	bc,6*16
+    ; call LOAD_TILES
+    ; ld	hl,BG0_1
+	; ld	de,$9084
+	; ld	bc,6*16
+    ; call LOAD_TILES
+
+    ; ld	hl,SPRITES
+	; ld	de,$8000
+	; ld	bc,17*16
+    ; call LOAD_TILES
 
     ld	de,_SCRN0	;where our map goes
-    ld	hl,BGMAP	;our little map
+    ld	hl,SPLASH_MAP	;our little map
     call LOAD_MAP
 
-    ld	de,_SCRN1	;where our map goes
-    ld	hl,WINDOWMAP	;our little map
-    call LOAD_MAP
+    ; ld	de,_SCRN1	;where our map goes
+    ; ld	hl,WINDOWMAP	;our little map
+    ; call LOAD_MAP
 	
     ld	a,%11100100	;load a normal palette up 11 10 01 00 - dark->light
 	ldh	[rBGP],a	;load the palette
@@ -57,21 +62,36 @@ START::
     ld  a,%11000011
     ldh [rLCDC],a
 
+    ld a,$A0
+    ld [rSCY],a
+
     call INIT_CHARACTER
     call INIT_ENEMIES
-    call INIT_BACKGROUND
+    ;call INIT_BACKGROUND
     call DMA_COPY
     ei
 
 LOOP::
 	call WAIT_VBLANK
-    call BACKGROUND_ANIMATE
+    call SPLASH_ANIM
+    ;call BACKGROUND_ANIMATE
     call READ_JOYPAD
-    call UPDATE_CHARACTER
-    call UPDATE_ENEMIES
-    call $FF80
+    ;call UPDATE_CHARACTER
+    ;call UPDATE_ENEMIES
+    ;call $FF80
     nop
 	jp LOOP
+
+SPLASH_ANIM::
+    ld a,[rSCY]
+    cp $00
+    jp z,SPLASH_ANIM_END
+    inc a
+    ld [rSCY],a
+    ret
+
+SPLASH_ANIM_END::
+    ret
 
 BEGIN_GAME::
     call $FF80
