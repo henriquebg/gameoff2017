@@ -110,8 +110,8 @@ LOAD_TILES::
 
 ;Map adress should be loaded previously into hl -> ld hl,MAP
 ;Background number should be loaded into de -> ld	de,_SCRN0 or ld	de,_SCRN1
+;Load previously into amount of bytes to load
 LOAD_MAP::
-  ld bc,1024		;since we are only loading 1024 tiles
 LOAD_MAP_LOOP::
 	ld	a,[hl+]	;get a byte of the map and inc hl
 	ld	[de],a	;put the byte at de
@@ -217,29 +217,8 @@ JOY_FALSE::
   ld  a,$0
   ret
 
-;Waits for bigger amount of times.
-;Register c needs to be loaded previously
-;Starts from ~ 0.125s -> ld c,$01
-;0.25s -> ld c,$02
-;0.5s -> ld c,$04
-;1s -> ld c,$08 and so on
-; WAIT_BIG::
-; WAIT_BIG_LOOP_EXT2::
-;     ld b,$64
-; WAIT_BIG_LOOP_EXT1::
-;     ld a,$FA
-; WAIT_BIG_LOOP_INT::
-;     dec a
-;     jp nz,WAIT_BIG_LOOP_INT
-;     dec b
-;     ld a,b
-;     jp nz,WAIT_BIG_LOOP_EXT1
-;     dec c
-;     ld a,c
-;     jp nz,WAIT_BIG_LOOP_EXT2
-;     ret
-
-;Waits for smaller amount of times.
+;Waits for certain amount of times.
+;It locks program flow until it's done.
 ;Register c needs to be loaded previously
 ;Starts from ~ 0.015s -> ld c,$01 ~ 1 frame
 ;0.03s -> ld c,$02
@@ -262,41 +241,47 @@ WAIT_LOOP_INT::
     ret
 
 ;Load previously into d the amount of time (using WAIT procedure) to use in each pallete change
+;and into hl rBGP or rOBP0 or rOBP1.
 FADE_IN::
   ld c,d
   call WAIT
+  ld	a,%00000000
+	ld	[hl],a
+  ld c,d
+  call WAIT  
   ld	a,%01000000
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ld	a,%10010000
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ld	a,%11100100
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ret
 
 ;Load previously into d the amount of time (using WAIT procedure) to use in each pallete change
+;and into hl rBGP or rOBP0 or rOBP1.
 FADE_OUT::
   ld c,d
   call WAIT
   ld	a,%11100100
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ld	a,%10010000
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ld	a,%01000000
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT
   ld	a,%00000000
-	ldh	[rBGP],a
+	ld	[hl],a
   ld c,d
   call WAIT  
   ret

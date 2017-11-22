@@ -9,8 +9,8 @@
 ;   Format               : Gameboy 4 color.
 ;   Compression          : None.
 ;   Counter              : None.
-;   Tile size            : 8 x 16
-;   Tiles                : 0 to 5
+;   Tile size            : 8 x 8
+;   Tiles                : 0 to 22
 ;
 ;   Palette colors       : None.
 ;   SGB Palette          : None.
@@ -22,9 +22,9 @@
 
 
 ; Bank of tiles.
-SPLASH_TILESBank EQU 0
+LVL1_BG_TILESBank EQU 0
 
 ; Start of tile array.
- GLOBAL SPLASH_TILES
+ GLOBAL LVL1_BG_TILES
 
 ; End of EXPORT.INC

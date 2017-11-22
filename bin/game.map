@@ -26,123 +26,115 @@ ROM Bank #0 (HOME):
   SECTION: $0060-$00F8 ($0099 bytes) ["Joypad IRQ Vector"]
            $0060 = JOYPAD_VECT
   SECTION: $0100-$014B ($004C bytes) ["Start"]
-  SECTION: $17F0-$193B ($014C bytes) ["Utilitaries"]
-           $183A = COPY_DATA
-           $18E0 = JOY_FALSE
-           $18E7 = WAIT_LOOP_INT
-           $18E5 = WAIT_LOOP_EXT1
-           $18E3 = WAIT_LOOP_EXT2
-           $18E3 = WAIT
-           $184B = LOAD_TILES
-           $17F0 = WAIT_VBLANK
-           $18B8 = JOY_A
-           $18A4 = JOY_UP
-           $18AE = JOY_DOWN
-           $1890 = JOY_RIGHT
-           $189A = JOY_LEFT
-           $1938 = RAND_NUM
-           $1815 = CLEAR_RAM
-           $1913 = FADE_OUT
-           $18F6 = FADE_IN
-           $1860 = READ_JOYPAD
-           $18D6 = JOY_START
-           $17F7 = CLEAR_MAP
-           $1806 = CLEAR_OAM
-           $1854 = LOAD_MAP
-           $1824 = DMA_COPY
-           $18C2 = JOY_B
-           $180C = CLEAR_OAM_LOOP
-           $18CC = JOY_SELECT
-           $1840 = COPY_DATA_LOOP
-           $1857 = LOAD_MAP_LOOP
-           $17FF = CLEAR_MAP_LOOP
-           $181B = CLEAR_RAM_LOOP
-  SECTION: $0DE0-$161F ($0840 bytes) ["Background Map"]
-           $0DE0 = SPLASH_MAP
-           $11E0 = BGMAP
-           $15E0 = WINDOWMAP
-  SECTION: $1620-$17EF ($01D0 bytes) ["Sprite Tiles"]
-           $1620 = SPLASH_SPRITES
-           $16E0 = SPRITES
-  SECTION: $01B0-$0DDF ($0C30 bytes) ["Background Tiles"]
-           $0AE0 = BG0_0
-           $0B20 = BG0_1
-           $0B60 = BG0_2
-           $0BA0 = BG1_0
-           $0BE0 = BG1_1
-           $0C20 = BG1_2
-           $0C60 = BG2_0
-           $0CA0 = BG2_1
-           $0CE0 = BG2_2
-           $0D20 = BG3_0
-           $0D60 = BG3_1
-           $0DA0 = BG3_2
-           $01B0 = SPLASH_TILES
-  SECTION: $1A60-$1B6E ($010F bytes) ["Background Animation"]
-           $1A75 = CHANGE_BG0
-           $1AB2 = CHANGE_BG1
-           $1AEF = CHANGE_BG2
-           $1B2C = CHANGE_BG3
-           $1B68 = ZERA
-           $1A68 = BACKGROUND_ANIMATE
-           $1A60 = INIT_BACKGROUND
-  SECTION: $1C31-$1CB2 ($0082 bytes) ["Character"]
-           $1C50 = CHECK_UP
-           $1C6A = CHECK_DOWN
-           $1C84 = CHECK_RIGHT
-           $1C9B = CHECK_LEFT
-           $1CB2 = END_CHARACTER
-           $1C31 = INIT_CHARACTER
-           $1C46 = UPDATE_CHARACTER
-  SECTION: $1B6F-$1C30 ($00C2 bytes) ["Enemies"]
-           $1B73 = INIT_ENEMY_0
-           $1BCB = UPDATE_ENEMY_0_POSITION
-           $1BB3 = UPDATE_ENEMY_0
-           $1BEE = UPDATE_ENEMY_0_SPRITE
-           $1BFB = CHANGE_ENEMY_0_SPRITE
-           $1C30 = ENEMY_END
-           $1B6F = INIT_ENEMIES
-           $1BAF = UPDATE_ENEMIES
-           $1BBA = MOVE_ENEMY_0
-  SECTION: $193C-$1A5F ($0124 bytes) ["SplashScreen"]
-           $1A03 = SPLASH_SCROLL_END
-           $19EB = SPLASH_SCREEN
-           $1A5F = EXIT_SPLASH
-           $1A16 = SPLASH_WAIT
-           $193C = INIT_SPLASH
-  SECTION: $0150-$01AF ($0060 bytes) ["StartGame"]
+  SECTION: $1EE9-$2031 ($0149 bytes) ["Utilitaries"]
+           $1F33 = COPY_DATA
+           $1FD6 = JOY_FALSE
+           $1FDD = WAIT_LOOP_INT
+           $1FDB = WAIT_LOOP_EXT1
+           $1FD9 = WAIT_LOOP_EXT2
+           $1FD9 = WAIT
+           $1F0E = CLEAR_RAM
+           $1EE9 = WAIT_VBLANK
+           $200D = FADE_OUT
+           $1FEC = FADE_IN
+           $1F56 = READ_JOYPAD
+           $1FCC = JOY_START
+           $1F44 = LOAD_TILES
+           $1F4D = LOAD_MAP
+           $1FAE = JOY_A
+           $1F9A = JOY_UP
+           $1FA4 = JOY_DOWN
+           $1F86 = JOY_RIGHT
+           $1F90 = JOY_LEFT
+           $1EF0 = CLEAR_MAP
+           $1EFF = CLEAR_OAM
+           $1F1D = DMA_COPY
+           $1FB8 = JOY_B
+           $1F05 = CLEAR_OAM_LOOP
+           $1FC2 = JOY_SELECT
+           $1F39 = COPY_DATA_LOOP
+           $1F4D = LOAD_MAP_LOOP
+           $1EF8 = CLEAR_MAP_LOOP
+           $1F14 = CLEAR_RAM_LOOP
+           $202E = RAND_NUM
+  SECTION: $0F3B-$1B7A ($0C40 bytes) ["Background Map"]
+           $177B = LVL1_MAP_0
+           $17CB = LVL1_MAP_1
+           $181B = LVL1_MAP_2
+           $186B = LVL1_MAP_3
+           $18BB = LVL1_MAP_4
+           $190B = LVL1_MAP_5
+           $195B = LVL1_MAP_6
+           $19AB = LVL1_MAP_7
+           $19FB = LVL1_MAP_8
+           $1A4B = LVL1_MAP_9
+           $1A9B = LVL1_MAP_10
+           $0F3B = SPLASH_MAP
+           $133B = BGMAP
+           $173B = WINDOWMAP
+  SECTION: $1B7B-$1D8A ($0210 bytes) ["Sprite Tiles"]
+           $1C3B = LVL1_SPRITES
+           $1B7B = SPLASH_SPRITES
+           $1C7B = LVL2_SPRITES
+  SECTION: $019B-$0F3A ($0DA0 bytes) ["Background Tiles"]
+           $0ACB = LVL1_BG_TILES_0
+           $0B0B = LVL1_BG_TILES_1
+           $0B4B = LVL1_BG_TILES_2
+           $0B8B = LVL1_BG_TILES_3
+           $0BCB = LVL1_BG_TILES_4
+           $019B = SPLASH_TILES
+           $0D7B = BG1_2
+           $0CFB = BG1_0
+           $0D3B = BG1_1
+           $0DFB = BG2_1
+           $0DBB = BG2_0
+           $0E3B = BG2_2
+           $0CBB = BG0_2
+           $0C7B = BG0_1
+           $0C3B = BG0_0
+           $0E7B = BG3_0
+           $0EBB = BG3_1
+           $0EFB = BG3_2
+           $0C0B = LVL1_BG_TILES_5
+  SECTION: $1D8B-$1EE8 ($015E bytes) ["SplashScreen"]
+           $1E52 = SPLASH_SCROLL_END
+           $1E3A = SPLASH_SCREEN
+           $1EB1 = EXIT_SPLASH
+           $1E68 = SPLASH_WAIT
+           $1D8B = INIT_SPLASH
+  SECTION: $2032-$216F ($013E bytes) ["Level1"]
+           $2160 = LEVEL1_LOOP
+           $2032 = LEVEL1
+  SECTION: $2170-$223A ($00CB bytes) ["Level1Character"]
+           $2170 = LVL1_INIT_CHARACTER
+           $2199 = LVL1_UPDATE_CHAR
+           $21C0 = LVL1_CHECK_UP
+           $21E0 = LVL1_CHECK_DOWN
+           $2200 = LVL1_CHECK_RIGHT
+           $221D = LVL1_CHECK_LEFT
+           $223A = LVL1_END_CHAR
+  SECTION: $0150-$019A ($004B bytes) ["StartGame"]
            $0150 = START
-           $01A1 = LOOP
-           $019B = BEGIN_GAME
-    SLACK: $239C bytes
+           $0198 = BEGIN_GAME
+    SLACK: $1E14 bytes
 
 WRAM Bank #0:
-  SECTION: $C000-$C00B ($000C bytes) ["RAM Vars"]
+  SECTION: $C000-$C00C ($000D bytes) ["RAM Vars"]
            $C002 = joypad_down
            $C003 = joypad_pressed
-           $C006 = speed_anim_bg
-           $C007 = counter_anim_bg
-           $C008 = enemy_0_y
-           $C009 = enemy_0_x
-           $C00A = enemy_0_sprite_delay
-           $C00B = enemy_0_sprite_set
+           $C00C = is_shoting
   SECTION: $C100-$C13B ($003C bytes) ["OAM Vars"]
-           $C128 = sprite_character
-           $C12C = sprite_0_enemy_0
-           $C130 = sprite_1_enemy_0
-           $C134 = sprite_2_enemy_0
-           $C138 = sprite_3_enemy_0
-           $C100 = sprite_0_splash
-           $C104 = sprite_1_splash
-           $C108 = sprite_2_splash
-           $C10C = sprite_3_splash
-           $C110 = sprite_4_splash
-           $C114 = sprite_5_splash
-           $C118 = sprite_6_splash
-           $C11C = sprite_7_splash
-           $C120 = sprite_8_splash
-           $C124 = sprite_9_splash
-    SLACK: $0FB8 bytes
+           $C100 = sprite_0
+           $C104 = sprite_1
+           $C108 = sprite_2
+           $C10C = sprite_3
+           $C110 = sprite_4
+           $C114 = sprite_5
+           $C118 = sprite_6
+           $C11C = sprite_7
+           $C120 = sprite_8
+           $C124 = sprite_9
+    SLACK: $0FB7 bytes
 
 WRAM Bank #1:
   EMPTY

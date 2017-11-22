@@ -6,71 +6,72 @@ INIT_SPLASH::
 
     call CLEAR_RAM
 
+    ;Setting PRESS START sprites' position
     ld a,$80
-    ld [sprite_0_splash],a
-    ld [sprite_1_splash],a
-    ld [sprite_2_splash],a
-    ld [sprite_3_splash],a
-    ld [sprite_4_splash],a
-    ld [sprite_5_splash],a
-    ld [sprite_6_splash],a
-    ld [sprite_7_splash],a
-    ld [sprite_8_splash],a
-    ld [sprite_9_splash],a
+    ld [sprite_0],a
+    ld [sprite_1],a
+    ld [sprite_2],a
+    ld [sprite_3],a
+    ld [sprite_4],a
+    ld [sprite_5],a
+    ld [sprite_6],a
+    ld [sprite_7],a
+    ld [sprite_8],a
+    ld [sprite_9],a
 
     ld a,$2A
-    ld [sprite_0_splash+1],a
+    ld [sprite_0+1],a
     ld a,$32
-    ld [sprite_1_splash+1],a
+    ld [sprite_1+1],a
     ld a,$3A
-    ld [sprite_2_splash+1],a
+    ld [sprite_2+1],a
     ld a,$42
-    ld [sprite_3_splash+1],a
+    ld [sprite_3+1],a
     ld a,$4A
-    ld [sprite_4_splash+1],a
+    ld [sprite_4+1],a
     ld a,$5A
-    ld [sprite_5_splash+1],a
+    ld [sprite_5+1],a
     ld a,$62
-    ld [sprite_6_splash+1],a
+    ld [sprite_6+1],a
     ld a,$6A
-    ld [sprite_7_splash+1],a
+    ld [sprite_7+1],a
     ld a,$72
-    ld [sprite_8_splash+1],a
+    ld [sprite_8+1],a
     ld a,$7A
-    ld [sprite_9_splash+1],a
+    ld [sprite_9+1],a
 
     ld a,$00
-    ld [sprite_0_splash+2],a
+    ld [sprite_0+2],a
     ld a,$02
-    ld [sprite_1_splash+2],a
+    ld [sprite_1+2],a
     ld a,$04
-    ld [sprite_2_splash+2],a
+    ld [sprite_2+2],a
     ld a,$06
-    ld [sprite_3_splash+2],a
+    ld [sprite_3+2],a
     ld a,$06
-    ld [sprite_4_splash+2],a
+    ld [sprite_4+2],a
     ld a,$06
-    ld [sprite_5_splash+2],a
+    ld [sprite_5+2],a
     ld a,$08
-    ld [sprite_6_splash+2],a
+    ld [sprite_6+2],a
     ld a,$0A
-    ld [sprite_7_splash+2],a
+    ld [sprite_7+2],a
     ld a,$02
-    ld [sprite_8_splash+2],a
+    ld [sprite_8+2],a
     ld a,$08
-    ld [sprite_9_splash+2],a
+    ld [sprite_9+2],a
 
     ld a,$00
-    ld [sprite_0_splash+3],a
-    ld [sprite_1_splash+3],a
-    ld [sprite_2_splash+3],a
-    ld [sprite_3_splash+3],a
-    ld [sprite_4_splash+3],a
-    ld [sprite_5_splash+3],a
-    ld [sprite_6_splash+3],a
-    ld [sprite_7_splash+3],a
-    ld [sprite_8_splash+3],a
-    ld [sprite_9_splash+3],a
+    ld [sprite_0+3],a
+    ld [sprite_1+3],a
+    ld [sprite_2+3],a
+    ld [sprite_3+3],a
+    ld [sprite_4+3],a
+    ld [sprite_5+3],a
+    ld [sprite_6+3],a
+    ld [sprite_7+3],a
+    ld [sprite_8+3],a
+    ld [sprite_9+3],a
     call $FF80
     ret
 
@@ -88,6 +89,7 @@ SPLASH_SCREEN::
     jp SPLASH_SCREEN
 
 SPLASH_SCROLL_END::
+    ld hl,rBGP
     ld d,$08
     call FADE_OUT
     ld d,$08
@@ -128,4 +130,27 @@ SPLASH_WAIT::
     jp SPLASH_WAIT
 
 EXIT_SPLASH::
+    ld a,$F0
+    ld [sprite_0],a
+    ld [sprite_1],a
+    ld [sprite_2],a
+    ld [sprite_3],a
+    ld [sprite_4],a
+    ld [sprite_5],a
+    ld [sprite_6],a
+    ld [sprite_7],a
+    ld [sprite_8],a
+    ld [sprite_9],a
+
+    call $FF80
+    
+    ld a,%11000011
+    ld [rLCDC],a
+
+    ld hl,rBGP
+    ld d,$08
+    call FADE_OUT
+    ld hl,rOBP0
+    ld d,$01
+    call FADE_OUT
     ret
