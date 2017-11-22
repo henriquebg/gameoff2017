@@ -10,6 +10,7 @@ INCLUDE "tiles_table.asm"
 INCLUDE "splash_screen.asm"
 INCLUDE "level1/lvl1_main.asm"
 INCLUDE "level1/lvl1_character.asm"
+INCLUDE "level1/lvl1_shot.asm"
 
 ;****************************************************************************************************************************************************
 ;*	Program Start
@@ -33,14 +34,29 @@ START::
 	ld	bc,192
     call LOAD_TILES
 
+    ld	hl,LVL1_SPRITES
+	ld	de,$80C0
+	ld	bc,64
+    call LOAD_TILES
+
+    ld	hl,LVL2_SPRITES
+	ld	de,$8100
+	ld	bc,64
+    call LOAD_TILES
+
     ld	hl,SPLASH_TILES
 	ld	de,$8800
-	ld	bc,2352
+	ld	bc,2720
     call LOAD_TILES
 
     ld bc,1024
     ld	de,_SCRN0	;where our map goes
     ld	hl,SPLASH_MAP	;our little map
+    call LOAD_MAP
+
+    ld bc,1024
+    ld	de,_SCRN1	;where our map goes
+    ld	hl,LVL1_MAP	;our little map
     call LOAD_MAP
 	
     ld	a,%11100100	;load a normal palette up 11 10 01 00 - dark->light
@@ -64,14 +80,8 @@ BEGIN_GAME::
     ;call INIT_SPLASH
     ;call SPLASH_SCREEN
     call LEVEL1
-; GAME_LOOP::
-; 	call WAIT_VBLANK
-;     ;call BACKGROUND_ANIMATE
-;     call READ_JOYPAD
-;     ;call UPDATE_CHARACTER
-;     ;call UPDATE_ENEMIES
-;     ;call $FF80
-;     nop
-; 	jp GAME_LOOP
+    nop
+    halt
+    jp BEGIN_GAME
 
 

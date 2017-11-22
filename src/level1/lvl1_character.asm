@@ -5,7 +5,7 @@ LVL1_INIT_CHARACTER::
     ld [sprite_0],a
     ld a,$0F
     ld [sprite_0+1],a
-    ld a,$00
+    ld a,$0C
     ld [sprite_0+2],a
     ld a,$00
     ld [sprite_0+3],a
@@ -13,7 +13,7 @@ LVL1_INIT_CHARACTER::
     ld [sprite_1],a
     ld a,$0F
     ld [sprite_1+1],a
-    ld a,$01
+    ld a,$0D
     ld [sprite_1+2],a
     ld a,$00
     ld [sprite_1+3],a
@@ -23,11 +23,11 @@ LVL1_UPDATE_CHAR::
     ld  a,[joypad_down]
     call JOY_A
     jp  nz,LVL1_CHECK_UP
-    ld a,[is_shoting]
+    ld a,[is_shooting]
     cp $01
     jp  z,LVL1_CHECK_UP
     ld a,$01
-    ld [is_shoting],a
+    ld [is_shooting],a
     ld a,[sprite_0]
     inc a
     ld [sprite_2],a

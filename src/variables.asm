@@ -8,10 +8,14 @@ vblank_count:          DB
 joypad_down:           DB
 joypad_pressed:        DB
 
-;Splash screen variable
+;Splash screen variables
 splash_scroll_delay    DB
 splash_anim_wait       DB
 
+;Level 1 variables
+is_shooting             DB
+
+;Level 2 variables
 ;Background animation variables
 speed_anim_bg          DB
 counter_anim_bg        DB
@@ -21,11 +25,6 @@ enemy_0_y              DB
 enemy_0_x              DB
 enemy_0_sprite_delay   DB
 enemy_0_sprite_set     DB
-
-;Level 1 variables
-is_shoting             DB
-
-
 
 SECTION "OAM Vars",WRAM0[$C100]
 
@@ -40,12 +39,12 @@ sprite_7:  DS 4
 sprite_8:  DS 4
 sprite_9:  DS 4
 
-sprite_character: DS 4
+; sprite_character: DS 4
 
-sprite_0_enemy_0: DS 4
-sprite_1_enemy_0: DS 4
-sprite_2_enemy_0: DS 4
-sprite_3_enemy_0: DS 4
+; sprite_0_enemy_0: DS 4
+; sprite_1_enemy_0: DS 4
+; sprite_2_enemy_0: DS 4
+; sprite_3_enemy_0: DS 4
 
 ; ;Level 1 sprites
 ; sprite1_lvl1_char: DS 4

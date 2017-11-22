@@ -31,10 +31,10 @@ DB $00,$00,$00,$FC,$3C,$02,$04,$7A
 DB $3C,$02,$04,$3A,$3E,$41,$7E,$9D
 DB $7E,$9D,$3E,$41,$04,$3A,$3C,$02
 DB $04,$7A,$3C,$02,$00,$FC,$00,$00
-DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
-DB $FF,$FF,$FF,$FF,$F5,$FA,$F5,$FA
-DB $FF,$BD,$FF,$99,$BD,$42,$81,$18
-DB $81,$5A,$BD,$42,$FF,$99,$FF,$BD
+DB $00,$00,$00,$00,$00,$00,$00,$00
+DB $00,$00,$00,$00,$05,$0A,$05,$0A
+DB $42,$00,$66,$00,$BD,$42,$E7,$7E
+DB $A5,$7E,$BD,$42,$66,$00,$42,$00
 
 LVL2_SPRITES::
 DB $18,$18,$3C,$5A,$5A,$18,$E7,$E7
@@ -372,9 +372,7 @@ DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $8F,$DF,$BF,$3F,$FF,$7F,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 
-
 ;Level 1 Background Tiles
-LVL1_BG_TILES_0::
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FB,$FB,$FF,$FF,$FF,$BF
@@ -383,8 +381,6 @@ DB $FF,$FF,$FF,$FF,$BF,$BD,$FF,$FF
 DB $FF,$FF,$FF,$FF,$EF,$FF,$FF,$FF
 DB $F0,$F0,$EF,$E0,$DE,$C1,$BF,$80
 DB $73,$04,$65,$0A,$73,$04,$7F,$00
-
-LVL1_BG_TILES_1::
 DB $5F,$20,$5E,$20,$7E,$00,$77,$08
 DB $BF,$80,$DF,$C0,$EF,$E0,$F0,$F7
 DB $0F,$1F,$E7,$1F,$F3,$0F,$F9,$07
@@ -393,8 +389,6 @@ DB $1E,$61,$4E,$91,$4C,$93,$1C,$63
 DB $F9,$07,$B3,$4F,$E7,$1F,$0F,$FF
 DB $FF,$FF,$FF,$FF,$F7,$F7,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
-
-LVL1_BG_TILES_2::
 DB $FE,$FF,$F8,$FF,$F2,$FE,$E4,$FE
 DB $C9,$FC,$D5,$FC,$AD,$FC,$AD,$FC
 DB $FF,$FF,$FF,$FF,$FE,$FF,$FF,$FF
@@ -403,8 +397,6 @@ DB $3F,$80,$7F,$00,$FF,$00,$FF,$00
 DB $E3,$0C,$CD,$12,$CD,$12,$E3,$0C
 DB $AD,$FC,$AD,$FC,$D5,$FC,$C8,$FF
 DB $E6,$FF,$F1,$FF,$FE,$FF,$FF,$FF
-
-LVL1_BG_TILES_3::
 DB $FF,$FF,$FF,$FF,$FF,$F7,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$00,$FF,$00,$FF,$00,$FF,$00
@@ -413,8 +405,6 @@ DB $9F,$80,$E7,$E0,$F8,$F8,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
 DB $FF,$FF,$FF,$FF,$1F,$1F,$E3,$1F
-
-LVL1_BG_TILES_4::
 DB $FC,$03,$FE,$01,$FF,$00,$FF,$00
 DB $FF,$00,$FF,$00,$E7,$08,$CB,$14
 DB $FF,$FF,$FF,$FF,$FF,$FF,$FF,$FF
@@ -423,8 +413,6 @@ DB $3F,$FF,$CF,$FF,$37,$FF,$0B,$FF
 DB $69,$FF,$B5,$7F,$B5,$7F,$B5,$7F
 DB $E7,$08,$FF,$00,$FE,$01,$F1,$0F
 DB $06,$FF,$F8,$FF,$03,$FC,$FE,$01
-
-LVL1_BG_TILES_5::
 DB $F9,$07,$E7,$1F,$1F,$1F,$FF,$FF
 DB $FF,$FF,$FF,$FF,$FB,$FB,$FF,$FF
 DB $A5,$7F,$8B,$7F,$37,$FF,$CF,$FF
