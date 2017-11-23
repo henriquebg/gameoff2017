@@ -286,13 +286,23 @@ FADE_OUT::
   call WAIT  
   ret
 
-;Gera um número randômico a partir do scroll_x. O registro b precisa ser
-;previamente carregado com uma máscara.
+;Generates a random number based on the value of address between $2000
+;and $20FF (ROM0). If the game doesn't reach $2000 within ROM0, so it will
+;probably return always 0. Change the value of A for a valid range for your game.
+;What will determine the address to take a value is divisor's 
+;value at the time this procedure is called.
+;Register b needs to be loaded with a mask for a range (limiter).
 ;Ex:
-;ld b,%00011111 resultará em um número entre 0 e 32
-;ld b,%01111110 resultará em um número entre 2 e 128
-;ld b,%11111100 resultará em um número entre 4 e 255
+;ld b,%00011111 generates a number between 0 and 32
+;ld b,%01111110 generates a number between 2 and 128
+;ld b,%11111100 generates a number between 4 and 255
 RAND_NUM::
+  ld a,%00100000
+  ld h,a
   ld a,[rDIV]
+  xor b
+  ld l,a
+  ld a,[hl]
+  xor b
   and b
   ret

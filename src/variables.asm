@@ -1,16 +1,19 @@
 SECTION "RAM Vars",WRAM0[$C000]
 
 ;vblank variables from exezin's game
-vblank_flag:           DB
-vblank_count:          DB
+vblank_flag:            DB
+vblank_count:           DB
 
 ;Joypad variables from exezin's game
-joypad_down:           DB
-joypad_pressed:        DB
+joypad_down:            DB
+joypad_pressed:         DB
 
 ;Splash screen variables
-splash_scroll_delay    DB
-splash_anim_wait       DB
+splash_scroll_delay     DB
+splash_anim_wait        DB
+
+; ;Random number generator's seed
+; seed_rand_num           DB
 
 ;Level 1 variables
 lvl1_is_shooting        DB
@@ -27,14 +30,16 @@ lvl1_speed_shot         DB
 
 ;Level 2 variables
 ;Background animation variables
-speed_anim_bg          DB
-counter_anim_bg        DB
+lvl2_speed_anim_bg      DB
+lvl2_counter_anim_bg    DB
+lvl2_speed_character    DB
 
 ;Enemies variables
-enemy_0_y              DB
-enemy_0_x              DB
-enemy_0_sprite_delay   DB
-enemy_0_sprite_set     DB
+lvl2_enemy_0_y              DB
+lvl2_enemy_0_x              DB
+lvl2_enemy_0_sprite_delay   DB
+lvl2_enemy_0_sprite_set     DB
+lvl2_enemy_0_is_active      DB
 
 SECTION "OAM Vars",WRAM0[$C100]
 

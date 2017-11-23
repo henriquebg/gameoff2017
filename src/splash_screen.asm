@@ -147,6 +147,10 @@ EXIT_SPLASH::
     ld a,%11000011
     ld [rLCDC],a
 
+    ; ;Refresh seed
+    ; ld a,[rDIV]
+    ; ld [seed_rand_num],a
+
     ld hl,rBGP
     ld d,$08
     call FADE_OUT

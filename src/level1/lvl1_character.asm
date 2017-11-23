@@ -26,6 +26,11 @@ LVL1_UPDATE_CHAR::
     ld  a,[joypad_down]
     call JOY_A
     jp  nz,LVL1_CHECK_UP
+
+    ; ;Refresh seed everytime A is pressed
+    ; ld a,[rDIV]
+    ; ld [seed_rand_num],a
+
     ld a,[lvl1_is_shooting]
     cp $01
     jp  z,LVL1_CHECK_UP
