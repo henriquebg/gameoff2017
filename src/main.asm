@@ -11,6 +11,7 @@ INCLUDE "splash_screen.asm"
 INCLUDE "level1/lvl1_main.asm"
 INCLUDE "level1/lvl1_character.asm"
 INCLUDE "level1/lvl1_shot.asm"
+INCLUDE "level1/lvl1_enemy.asm"
 
 ;****************************************************************************************************************************************************
 ;*	Program Start
@@ -68,6 +69,9 @@ START::
 	;turn on LCD, BG0, OBJ0, etc
     ld  a,%11000001
     ld [rLCDC],a
+
+    ; ld a,TACF_START
+    ; ld [rTAC],a
 
     ;call INIT_CHARACTER
     ;call INIT_ENEMIES

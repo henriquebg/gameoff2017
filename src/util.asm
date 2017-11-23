@@ -293,6 +293,6 @@ FADE_OUT::
 ;ld b,%01111110 resultará em um número entre 2 e 128
 ;ld b,%11111100 resultará em um número entre 4 e 255
 RAND_NUM::
-  ld a,[rTIMA]
+  ld a,[rDIV]
   and b
   ret

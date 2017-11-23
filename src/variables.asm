@@ -13,7 +13,17 @@ splash_scroll_delay    DB
 splash_anim_wait       DB
 
 ;Level 1 variables
-is_shooting             DB
+lvl1_is_shooting        DB
+lvl1_enemy_direction    DB
+lvl1_enemy_delay        DB
+lvl1_enemy_speed_delay  DB
+lvl1_enemy_speed_x      DB
+lvl1_enemy_speed_y      DB
+lvl1_score              DB
+lvl1_scroll_delay       DB
+lvl1_scroll_speed       DB
+lvl1_speed_character    DB
+lvl1_speed_shot         DB
 
 ;Level 2 variables
 ;Background animation variables
