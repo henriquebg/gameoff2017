@@ -286,23 +286,35 @@ FADE_OUT::
   call WAIT  
   ret
 
-;Generates a random number based on the value of address between $2000
-;and $20FF (ROM0). If the game doesn't reach $2000 within ROM0, so it will
-;probably return always 0. Change the value of A for a valid range for your game.
-;What will determine the address to take a value is divisor's 
-;value at the time this procedure is called.
+;Fade in with inverted colours for Level 2
+FADE_IN_INV::
+  ld c,d
+  call WAIT
+  ld	a,%00000000
+	ld	[hl],a
+  ld c,d
+  call WAIT  
+  ld	a,%00000001
+	ld	[hl],a
+  ld c,d
+  call WAIT
+  ld	a,%00100010
+	ld	[hl],a
+  ld c,d
+  call WAIT
+  ld	a,%00100111
+	ld	[hl],a
+  ld c,d
+  call WAIT
+  ret
+
+;Generates a random number based on the value of divisor.
 ;Register b needs to be loaded with a mask for a range (limiter).
 ;Ex:
 ;ld b,%00011111 generates a number between 0 and 32
 ;ld b,%01111110 generates a number between 2 and 128
 ;ld b,%11111100 generates a number between 4 and 255
 RAND_NUM::
-  ld a,%00100000
-  ld h,a
   ld a,[rDIV]
-  xor b
-  ld l,a
-  ld a,[hl]
-  xor b
   and b
   ret

@@ -51,7 +51,7 @@ START::
 
     ld bc,1024
     ld	de,_SCRN1
-    ld	hl,LVL2_MAP
+    ld	hl,LVL1_MAP
     call LOAD_MAP
 	
     ;Loading background and sprites palletes for Splash Screen
@@ -62,7 +62,7 @@ START::
 	ld	[rOBP0],a	;load the palette
 
 	;turn on LCD, BG0, OBJ0, etc
-    ld  a,%11000001
+    ld  a,%11001001
     ld [rLCDC],a
 
     ; ;Initialising seed with current divisor's value

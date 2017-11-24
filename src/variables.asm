@@ -11,6 +11,8 @@ joypad_pressed:         DB
 ;Splash screen variables
 splash_scroll_delay     DB
 splash_anim_wait        DB
+press_start_delay       DB
+press_start_colour      DB
 
 ; ;Random number generator's seed
 ; seed_rand_num           DB
@@ -27,6 +29,7 @@ lvl1_scroll_delay       DB
 lvl1_scroll_speed       DB
 lvl1_speed_character    DB
 lvl1_speed_shot         DB
+lvl1_plot_twist         DB
 
 ;Level 2 variables
 ;Background animation variables

@@ -34,33 +34,83 @@ LVL1_UPDATE_SHOT::
 
 LVL1_MOVE_RIGHT::
     ld a,[sprite_2+1]
-    cp _RIGHT_BORDER_OFFSET
+    cp _RIGHT_BORDER
     jp nc,LVL1_RESET_SHOT
     ld a,[lvl1_speed_shot]
     ld b,a
     ld a,[sprite_2+1]
     add a,b
     ld [sprite_2+1],a
-    call LVL1_SHOT_ENEMY_COLLISION
+    call LVL1_SHOT_ENEMY_COLLISION_1
     ret
 
-LVL1_SHOT_ENEMY_COLLISION::
-    ld a,[sprite_2+1]
-    ld b,a
+;This one will test if front of shot is within enemy's area
+LVL1_SHOT_ENEMY_COLLISION_1::
+    ;Test if center of shot in x (x = 8 in tile) is less than enemy's right corner
     ld a,[sprite_3+1]
-    cp b
-    jp c,LVL1_SHOT_END
-    sub $08
-    cp b
-    jp nc,LVL1_SHOT_END
-    ld a,[sprite_2]
     ld b,a
-    ld a,[sprite_3]
+    ld a,[sprite_2+1]
     cp b
-    jp c,LVL1_SHOT_END
+    jp nc,LVL1_SHOT_ENEMY_COLLISION_2
+    ;Test if center of shot in x (x = 8 in tile) is more than enemy's left corner
+    ld a,[sprite_3+1]
     sub $08
+    ld b,a
+    ld a,[sprite_2+1]
+    cp b
+    jp c,LVL1_SHOT_ENEMY_COLLISION_2
+    ;Test if center of shot in y (y = 8 in tile) is less than enemy's bottom
+    ld a,[sprite_3]
+    ld b,a
+    ld a,[sprite_2]
+    cp b
+    jp nc,LVL1_SHOT_ENEMY_COLLISION_2
+    ;Test if center of shot in y (y = 8 in tile) is less than enemy's top
+    ld a,[sprite_3]
+    sub $08
+    ld b,a
+    ld a,[sprite_2]
+    cp b
+    jp c,LVL1_SHOT_ENEMY_COLLISION_2
+    ;If everything is true, so shot is within enemy's area
+    ld a,[lvl1_score]
+    inc a
+    ld [lvl1_score],a
+    call LVL1_INIT_SHOT
+    call LVL1_RESET_ENEMY
+    ret
+
+;This one will test if back of shot is within enemy's area
+LVL1_SHOT_ENEMY_COLLISION_2::
+    ;Test if center of shot in x (x - 4px) is less than enemy's right corner
+    ld a,[sprite_3+1]
+    ld b,a
+    ld a,[sprite_2+1]
+    sub $04
     cp b
     jp nc,LVL1_SHOT_END
+    ;Test if center of shot in x (x - 4px) is more than enemy's left corner
+    ld a,[sprite_3+1]
+    sub $08
+    ld b,a
+    ld a,[sprite_2+1]
+    sub $04
+    cp b
+    jp c,LVL1_SHOT_END
+    ;Test if center of shot in y (y = 8) is less than enemy's bottom
+    ld a,[sprite_3]
+    ld b,a
+    ld a,[sprite_2]
+    cp b
+    jp nc,LVL1_SHOT_END
+    ;Test if center of shot in y (y = 8) is less than enemy's top
+    ld a,[sprite_3]
+    sub $08
+    ld b,a
+    ld a,[sprite_2]
+    cp b
+    jp c,LVL1_SHOT_END
+    ;If everything is true, so shot is within enemy's area
     ld a,[lvl1_score]
     inc a
     ld [lvl1_score],a
@@ -71,6 +121,8 @@ LVL1_SHOT_ENEMY_COLLISION::
 LVL1_RESET_SHOT::
     ld a,$00
     ld [lvl1_is_shooting],a
+    ld a,$F0
+    ld [sprite_2+1],a
     ret
 
 LVL1_SHOT_END::

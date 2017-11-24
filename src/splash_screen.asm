@@ -73,6 +73,11 @@ INIT_SPLASH::
     ld [sprite_8+3],a
     ld [sprite_9+3],a
     call $FF80
+
+    ld a,$00
+    ld [press_start_colour],a
+    ld a,$08
+    ld [press_start_delay],a
     ret
 
 SPLASH_SCREEN::
@@ -102,34 +107,69 @@ SPLASH_SCROLL_END::
 SPLASH_WAIT::
     call WAIT_VBLANK
     call READ_JOYPAD
+    ld  a,[joypad_pressed]
+    call JOY_START
+    jp z,EXIT_SPLASH
+    ld a,[press_start_delay]
+    cp $00
+    jp z,CHANGE_PRESS_START
+    dec a
+    ld [press_start_delay],a
+    jp SPLASH_WAIT
+
+CHANGE_PRESS_START::
+    ld a,[press_start_colour]
+    cp $00
+    jp z,PRESS_START_COLOUR_0
+    cp $01
+    jp z,PRESS_START_COLOUR_1
+    cp $02
+    jp z,PRESS_START_COLOUR_2
+    ld a,$00
+    ld [press_start_colour],a
+    jp SPLASH_WAIT
+
+PRESS_START_COLOUR_0::
     ld	a,%00100111
-	ldh	[rOBP0],a
-    ld  a,[joypad_pressed]
-    call JOY_START
-    jp z,EXIT_SPLASH
-    ld c,$08
-    call WAIT
+	ld	[rOBP0],a
+    ld a,$01
+    ld [press_start_colour],a
+    ld a,$08
+    ld [press_start_delay],a
+    jp SPLASH_WAIT
+
+PRESS_START_COLOUR_1::
     ld	a,%10100111
-	ldh	[rOBP0],a
-    ld  a,[joypad_pressed]
-    call JOY_START
-    jp z,EXIT_SPLASH
-    ld c,$08
-    call WAIT
+	ld	[rOBP0],a
+    ld a,$02
+    ld [press_start_colour],a
+    ld a,$08
+    ld [press_start_delay],a
+    jp SPLASH_WAIT
+
+PRESS_START_COLOUR_2::
     ld	a,%01100111
-	ldh	[rOBP0],a
-    ld  a,[joypad_pressed]
-    call JOY_START
-    jp z,EXIT_SPLASH
-    ld c,$08
-    call WAIT
-    ld  a,[joypad_pressed]
-    call JOY_START
-    jp z,EXIT_SPLASH
-    nop
+	ld	[rOBP0],a
+    ld a,$00
+    ld [press_start_colour],a
+    ld a,$08
+    ld [press_start_delay],a
     jp SPLASH_WAIT
 
 EXIT_SPLASH::
+    ld	a,%00100111
+	ld	[rOBP0],a
+
+    ld c,$3C
+    call WAIT
+
+    ld hl,rBGP
+    ld d,$0F
+    call FADE_OUT
+
+    ld c,$10
+    call WAIT
+
     ld a,$F0
     ld [sprite_0],a
     ld [sprite_1],a
@@ -141,20 +181,9 @@ EXIT_SPLASH::
     ld [sprite_7],a
     ld [sprite_8],a
     ld [sprite_9],a
-
+    call WAIT_VBLANK
     call $FF80
-    
+
     ld a,%11000011
     ld [rLCDC],a
-
-    ; ;Refresh seed
-    ; ld a,[rDIV]
-    ; ld [seed_rand_num],a
-
-    ld hl,rBGP
-    ld d,$08
-    call FADE_OUT
-    ld hl,rOBP0
-    ld d,$01
-    call FADE_OUT
     ret

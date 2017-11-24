@@ -1,7 +1,7 @@
 Section "Level1",ROM0
 
 LEVEL1::
-    ld a,%00100111
+    ld a,%11111111
     ld [rOBP0],a
     ld  a,%11001011
     ld [rLCDC],a
@@ -20,7 +20,19 @@ LEVEL1::
     ld hl,rBGP
     ld d,$0F
     call FADE_IN
+
+    call WAIT_VBLANK
+    call $FF80
+
+    ld hl,rOBP0
+    ld d,$0F
+    call FADE_IN
+    ld a,%00100111
+    ld [rOBP0],a
     
+    ld c,$72
+    call WAIT
+
     nop
     jp LEVEL1_LOOP
 

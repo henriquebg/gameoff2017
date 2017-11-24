@@ -14,15 +14,23 @@ LVL1_INIT_ENEMY::
     ld b,%00000001
     call RAND_NUM
     ld [lvl1_enemy_direction],a
+    ld a,$00
+    ld [lvl1_plot_twist],a
     call LVL1_ENEMY0
     ret
 
 LVL1_UPDATE_ENEMY::
+    ld a,[lvl1_plot_twist]
+    cp $01
+    jp z,LVL1_MOVE_ENEMY
     ld a,[sprite_3]
-    cp _LOWER_BORDER_OFFSET
-    jp z,LVL1_ENEMY_DIRECTION_UP
-    cp _UPPER_BORDER_OFFSET
-    jp z,LVL1_ENEMY_DIRECTION_DOWN
+    sub _LOWER_BORDER_OFFSET
+    cp $04
+    jp c,LVL1_ENEMY_DIRECTION_UP
+    ld a,[sprite_3]
+    sub _UPPER_BORDER
+    cp $04
+    jp c,LVL1_ENEMY_DIRECTION_DOWN
     jp LVL1_MOVE_ENEMY
     ret
 
@@ -100,8 +108,34 @@ LVL1_RESET_ENEMY::
     cp $04
     jp z,LVL1_ENEMY4
     cp $05
-    jp z,START
+    jp z,LVL1_GOTO_LEVEL2
     ret
+
+LVL1_GOTO_LEVEL2::   
+    ld a,$F0
+    ld [sprite_2],a
+    ld [sprite_3],a
+    call WAIT_VBLANK
+    call $FF80
+
+    ld c,$0F
+    call WAIT
+
+    ld hl,rBGP
+    ld d,$0F
+    call FADE_OUT
+    ld hl,rOBP0
+    ld d,$0F
+    call FADE_OUT
+    ld a,$00
+    ld [rSCX],a
+    
+    ld [sprite_0],a
+    ld [sprite_1],a
+    call WAIT_VBLANK
+    call $FF80
+
+    jp LEVEL2
 
 LVL1_ENEMY0::
     ;This delay is used only when speed has to be less than 1px per frame (in this case,
@@ -127,12 +161,8 @@ LVL1_ENEMY1::
     ld [lvl1_enemy_speed_x],a
     ld a,$01
     ld [lvl1_enemy_speed_y],a
-    ld a,$02
-    ld [lvl1_speed_character],a
     ld a,$03
     ld [lvl1_scroll_speed],a
-    ld a,$05
-    ld [lvl1_speed_shot],a
     ret
 
 LVL1_ENEMY2::
@@ -144,8 +174,10 @@ LVL1_ENEMY2::
     ld a,$03
     ld [lvl1_enemy_speed_y],a
     ld a,$02
+    ld [lvl1_speed_character],a
+    ld a,$02
     ld [lvl1_scroll_speed],a
-    ld a,$06
+    ld a,$05
     ld [lvl1_speed_shot],a
     ret
 
@@ -155,29 +187,25 @@ LVL1_ENEMY3::
     ld [lvl1_enemy_speed_delay],a
     ld a,$03
     ld [lvl1_enemy_speed_x],a
-    ld a,$03
+    ld a,$04
     ld [lvl1_enemy_speed_y],a
-    ld a,$03
-    ld [lvl1_speed_character],a
     ld a,$01
     ld [lvl1_scroll_speed],a
-    ld a,$07
-    ld [lvl1_speed_shot],a
+    ld a,$01
+    ld [lvl1_plot_twist],a
     ret
 
 LVL1_ENEMY4::
     ld a,$00
     ld [lvl1_enemy_delay],a
     ld [lvl1_enemy_speed_delay],a
-    ld a,$04
+    ld a,$05
     ld [lvl1_enemy_speed_x],a
     ld a,$03
     ld [lvl1_enemy_speed_y],a
-    ld a,$04
-    ld [lvl1_speed_character],a
     ld a,$00
     ld [lvl1_scroll_speed],a
-    ld a,$08
+    ld a,$06
     ld [lvl1_speed_shot],a
     ret
 

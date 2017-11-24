@@ -123,10 +123,28 @@ LVL1_CHARACTER_ENEMY_COLLISION::
     jp nc,LVL1_END_CHAR
     ld c,$3C
     call WAIT
-    ld d,$08
+    ld d,$0F
     ld hl,rBGP
     call FADE_OUT
-    jp START
+    
+    ld a,$F0
+    ld [sprite_2],a
+    call WAIT_VBLANK
+    call $FF80
+
+    ld d,$0F
+    ld hl,rOBP0
+    call FADE_OUT
+
+    ld a,$F0
+    ld [sprite_0],a
+    ld [sprite_1],a
+    ld [sprite_3],a
+    call WAIT_VBLANK
+    call $FF80
+    ld a,$00
+    ld [rSCX],a
+    jp LEVEL1
 
 LVL1_END_CHAR::
     ret
