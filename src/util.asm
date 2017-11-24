@@ -316,5 +316,10 @@ FADE_IN_INV::
 ;ld b,%11111100 generates a number between 4 and 255
 RAND_NUM::
   ld a,[rDIV]
+  ld c,a
+  ld a,[seed_rand_num]
+  rla
+  ld [seed_rand_num],a
+  xor c
   and b
   ret

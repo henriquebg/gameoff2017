@@ -157,6 +157,10 @@ PRESS_START_COLOUR_2::
     jp SPLASH_WAIT
 
 EXIT_SPLASH::
+    ;Initialising seed with value of divisor (kind of random).
+    ld a,[rDIV]
+    ld [seed_rand_num],a
+
     ld	a,%00100111
 	ld	[rOBP0],a
 
