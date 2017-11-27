@@ -3,13 +3,21 @@ Section "Level2Enemy0",ROM0
 ;Enemy 0 routines
 LVL2_INIT_ENEMY_0::
     ;Setting initial position for enemy 0
+LVL_2_ENEMY_0_LOOP_POS_Y::    
     ld b,%00111000
     call RAND_NUM
-    add a,$0F
+    cp _UPPER_BORDER
+    jp c,LVL_2_ENEMY_0_LOOP_POS_Y
+    cp $49
+    jp nc,LVL_2_ENEMY_0_LOOP_POS_Y
     ld [lvl2_enemy_0_y],a
-    ld b,%00111000
+LVL_2_ENEMY_0_LOOP_POS_X::    
+    ld b,%00011100
     call RAND_NUM
-    add a,$0F
+    cp _LEFT_BORDER
+    jp c,LVL_2_ENEMY_0_LOOP_POS_X
+    cp $50
+    jp nc,LVL_2_ENEMY_0_LOOP_POS_X
     ld [lvl2_enemy_0_x],a
     call LVL2_UPDATE_ENEMY_0_POSITION
 
@@ -31,6 +39,8 @@ LVL2_INIT_ENEMY_0::
     ld [sprite_4+3],a
     ld [lvl2_enemy_0_sprite_delay],a
     ld [lvl2_enemy_0_sprite_set],a
+    ld a,$40
+    ld [lvl2_enemy_0_change_speed],a
     ret    
 
 LVL2_UPDATE_ENEMY_0::
@@ -41,8 +51,10 @@ LVL2_UPDATE_ENEMY_0::
     ret
 
 LVL2_UPDATE_ENEMY_0_SPRITE::
+    ld a,[lvl2_enemy_0_change_speed]
+    ld b,a
     ld a,[lvl2_enemy_0_sprite_delay]
-    cp $40
+    cp b
     jp z,LVL2_CHANGE_ENEMY_0_SPRITE
     inc a
     ld [lvl2_enemy_0_sprite_delay],a
@@ -76,14 +88,14 @@ LVL2_CHANGE_ENEMY_0_SPRITE::
     ld a,$00
     ld [lvl2_enemy_0_sprite_delay],a
 
-    call LVL2_MOVE_ENEMY_0
-    call LVL2_UPDATE_ENEMY_0_POSITION
+    ;call LVL2_MOVE_ENEMY_0
     ret
 
 LVL2_MOVE_ENEMY_0::
     ld a,[lvl2_enemy_0_y]
     add a,$08
     ld [lvl2_enemy_0_y],a
+    call LVL2_UPDATE_ENEMY_0_POSITION
     ret
 
 LVL2_UPDATE_ENEMY_0_POSITION::
@@ -126,7 +138,8 @@ LVL2_ENEMY_0_DAMAGE::
     ld [lvl2_enemy_0_y],a
     ld a,$00
     ld [lvl2_enemy_0_is_active],a
-    ld c,%01111111
+    ld [lvl2_enemy_0_sprite_set],a
+    ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
     call LVL2_UPDATE_ENEMY_0_POSITION
@@ -138,7 +151,8 @@ LVL2_KILL_ENEMY_0::
     ld [lvl2_enemy_0_y],a
     ld a,$00
     ld [lvl2_enemy_0_is_active],a
-    ld c,%01111111
+    ld [lvl2_enemy_0_sprite_set],a
+    ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
     call LVL2_UPDATE_ENEMY_0_POSITION

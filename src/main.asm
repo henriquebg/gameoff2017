@@ -36,7 +36,7 @@ START::
     ;Load sprite tiles for Splash Screen, Level 1 and Level 2
     ld	hl,SPRITES
 	ld	de,$8000
-	ld	bc,528
+	ld	bc,816
     call LOAD_TILES
 
     ;Load background tiles for Splash Screen, Level 1 and Level 2

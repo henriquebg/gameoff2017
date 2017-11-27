@@ -3,7 +3,7 @@ SECTION "Level2Character",ROM0
 LVL2_INIT_CHARACTER::
     ld a,$40
     ld [sprite_0],a
-    ld a,$48
+    ld a,$50
     ld [sprite_0+1],a
     ld a,$10
     ld [sprite_0+2],a

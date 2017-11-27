@@ -318,8 +318,8 @@ RAND_NUM::
   ld a,[rDIV]
   ld c,a
   ld a,[seed_rand_num]
-  rla
-  ld [seed_rand_num],a
+  cpl
   xor c
   and b
+  ld [seed_rand_num],a
   ret

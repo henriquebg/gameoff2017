@@ -3,13 +3,21 @@ Section "Level2Enemy1",ROM0
 ;Enemy 1 routines
 LVL2_INIT_ENEMY_1::
     ;Setting initial position for enemy 0
+LVL_2_ENEMY_1_LOOP_POS_Y::    
     ld b,%00111000
     call RAND_NUM
-    add a,$0F
+    cp _UPPER_BORDER
+    jp c,LVL_2_ENEMY_1_LOOP_POS_Y
+    cp $49
+    jp nc,LVL_2_ENEMY_1_LOOP_POS_Y
     ld [lvl2_enemy_1_y],a
-    ld b,%00111000
+LVL_2_ENEMY_1_LOOP_POS_X::    
+    ld b,%11111111
     call RAND_NUM
-    add a,$0F
+    cp _RIGHT_BORDER_NEGATIVE_OFFSET
+    jp nc,LVL_2_ENEMY_1_LOOP_POS_X
+    cp $50
+    jp c,LVL_2_ENEMY_1_LOOP_POS_X
     ld [lvl2_enemy_1_x],a
     call LVL2_UPDATE_ENEMY_1_POSITION
 
@@ -31,9 +39,8 @@ LVL2_INIT_ENEMY_1::
     ld [sprite_8+3],a
     ld [lvl2_enemy_1_sprite_delay],a
     ld [lvl2_enemy_1_sprite_set],a
-
-    ld a,$01
-    ld [lvl2_enemy_1_is_active],a
+    ld a,$40
+    ld [lvl2_enemy_1_change_speed],a
     ret    
 
 LVL2_UPDATE_ENEMY_1::
@@ -44,8 +51,10 @@ LVL2_UPDATE_ENEMY_1::
     ret
 
 LVL2_UPDATE_ENEMY_1_SPRITE::
+    ld a,[lvl2_enemy_1_change_speed]
+    ld b,a
     ld a,[lvl2_enemy_1_sprite_delay]
-    cp $40
+    cp b
     jp z,LVL2_CHANGE_ENEMY_1_SPRITE
     inc a
     ld [lvl2_enemy_1_sprite_delay],a
@@ -79,14 +88,14 @@ LVL2_CHANGE_ENEMY_1_SPRITE::
     ld a,$00
     ld [lvl2_enemy_1_sprite_delay],a
 
-    call LVL2_MOVE_ENEMY_1
-    call LVL2_UPDATE_ENEMY_1_POSITION
+    ;call LVL2_MOVE_ENEMY_1
     ret
 
 LVL2_MOVE_ENEMY_1::
     ld a,[lvl2_enemy_1_y]
     add a,$08
     ld [lvl2_enemy_1_y],a
+    call LVL2_UPDATE_ENEMY_1_POSITION
     ret
 
 LVL2_UPDATE_ENEMY_1_POSITION::
@@ -112,7 +121,7 @@ LVL2_ENEMY_1_SPAWN::
     cp $00
     jp nz,LVL2_ENEMY_END
     ld a,$01
-    ld [lvl2_enemy_0_is_active],a
+    ld [lvl2_enemy_1_is_active],a
     call LVL2_INIT_ENEMY_1
     ret
 
@@ -129,7 +138,8 @@ LVL2_ENEMY_1_DAMAGE::
     ld [lvl2_enemy_1_y],a
     ld a,$00
     ld [lvl2_enemy_1_is_active],a
-    ld c,%01111111
+    ld [lvl2_enemy_1_sprite_set],a
+    ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_1_spawn_delay],a
     call LVL2_UPDATE_ENEMY_1_POSITION
@@ -141,7 +151,8 @@ LVL2_KILL_ENEMY_1::
     ld [lvl2_enemy_1_y],a
     ld a,$00
     ld [lvl2_enemy_1_is_active],a
-    ld c,%01111111
+    ld [lvl2_enemy_1_sprite_set],a
+    ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_1_spawn_delay],a
     call LVL2_UPDATE_ENEMY_1_POSITION
