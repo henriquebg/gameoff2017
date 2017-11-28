@@ -286,7 +286,7 @@ FADE_OUT::
   call WAIT  
   ret
 
-;Fade in with inverted colours for Level 2
+;Fade in for inverted colours palette
 FADE_IN_INV::
   ld c,d
   call WAIT
@@ -303,6 +303,23 @@ FADE_IN_INV::
   ld c,d
   call WAIT
   ld	a,%00100111
+	ld	[hl],a
+  ld c,d
+  call WAIT
+  ret
+
+FADE_OUT_INV::
+  ld c,d
+  call WAIT
+  ld a,%01011011
+	ld	[hl],a
+  ld c,d
+  call WAIT  
+  ld	a,%10101111
+	ld	[hl],a
+  ld c,d
+  call WAIT
+  ld	a,%11111111
 	ld	[hl],a
   ld c,d
   call WAIT

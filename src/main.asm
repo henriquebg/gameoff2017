@@ -64,7 +64,7 @@ START::
 	ld	[rOBP0],a	;load the palette
 
 	;turn on LCD, BG0, OBJ0, etc
-    ld  a,%11001001
+    ld  a,%11000001
     ld [rLCDC],a
 
     ; ;Initialising seed with current divisor's value
@@ -76,9 +76,9 @@ START::
     ei
 
 BEGIN_GAME::
-    ; call INIT_SPLASH
-    ; call SPLASH_SCREEN
-    call LEVEL2
+    call INIT_SPLASH
+    call SPLASH_SCREEN
+    call LEVEL1
     nop
     halt
     jp BEGIN_GAME

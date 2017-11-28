@@ -39,8 +39,6 @@ LVL_2_ENEMY_0_LOOP_POS_X::
     ld [sprite_4+3],a
     ld [lvl2_enemy_0_sprite_delay],a
     ld [lvl2_enemy_0_sprite_set],a
-    ld a,$40
-    ld [lvl2_enemy_0_change_speed],a
     ret    
 
 LVL2_UPDATE_ENEMY_0::
@@ -51,11 +49,11 @@ LVL2_UPDATE_ENEMY_0::
     ret
 
 LVL2_UPDATE_ENEMY_0_SPRITE::
-    ld a,[lvl2_enemy_0_change_speed]
+    ld a,[lvl2_enemies_change_speed]
     ld b,a
     ld a,[lvl2_enemy_0_sprite_delay]
     cp b
-    jp z,LVL2_CHANGE_ENEMY_0_SPRITE
+    jp nc,LVL2_CHANGE_ENEMY_0_SPRITE
     inc a
     ld [lvl2_enemy_0_sprite_delay],a
     ret
@@ -88,7 +86,7 @@ LVL2_CHANGE_ENEMY_0_SPRITE::
     ld a,$00
     ld [lvl2_enemy_0_sprite_delay],a
 
-    ;call LVL2_MOVE_ENEMY_0
+    call LVL2_MOVE_ENEMY_0
     ret
 
 LVL2_MOVE_ENEMY_0::
@@ -139,6 +137,7 @@ LVL2_ENEMY_0_DAMAGE::
     ld a,$00
     ld [lvl2_enemy_0_is_active],a
     ld [lvl2_enemy_0_sprite_set],a
+    ld [lvl2_enemy_0_sprite_delay],a
     ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
@@ -155,6 +154,7 @@ LVL2_KILL_ENEMY_0::
     ld a,$00
     ld [lvl2_enemy_0_is_active],a
     ld [lvl2_enemy_0_sprite_set],a
+    ld [lvl2_enemy_0_sprite_delay],a
     ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
@@ -162,4 +162,9 @@ LVL2_KILL_ENEMY_0::
     inc a
     ld [lvl2_score],a
     call LVL2_UPDATE_ENEMY_0_POSITION
+    ld a,[lvl2_enemies_change_speed]
+    cp $1C
+    jp c,LVL2_ENEMY_END
+    sub $04
+    ld [lvl2_enemies_change_speed],a
     ret

@@ -38,13 +38,14 @@ lvl2_counter_anim_bg        DB
 lvl2_speed_character        DB
 
 ;Enemies variables
+lvl2_enemies_change_speed   DB
+
 lvl2_enemy_0_y              DB
 lvl2_enemy_0_x              DB
 lvl2_enemy_0_sprite_delay   DB
 lvl2_enemy_0_sprite_set     DB
 lvl2_enemy_0_is_active      DB
 lvl2_enemy_0_spawn_delay    DB
-lvl2_enemy_0_change_speed   DB
 
 ;Enemies variables
 lvl2_enemy_1_y              DB
@@ -53,7 +54,6 @@ lvl2_enemy_1_sprite_delay   DB
 lvl2_enemy_1_sprite_set     DB
 lvl2_enemy_1_is_active      DB
 lvl2_enemy_1_spawn_delay    DB
-lvl2_enemy_1_change_speed   DB
 
 ;Character variables
 lvl2_is_shooting            DB

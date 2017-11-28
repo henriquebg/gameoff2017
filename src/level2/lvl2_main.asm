@@ -12,9 +12,7 @@ LEVEL2::
     ld [lvl2_lives],a
     ld a,$01
     ld [lvl2_enemies_active],a
-    
-    ld a,%11111111
-    ld [rOBP0],a
+
     ld c,$40
     call WAIT
 
@@ -28,14 +26,14 @@ LEVEL2::
     call FADE_IN_INV
     ld a,%00011011
     ld [rOBP0],a
-    jp LEVEL2_END_ANIM
+    jp LEVEL2_LOOP
 
 LEVEL2_LOOP::
     call WAIT_VBLANK
     call LVL2_BACKGROUND_ANIMATE
     call $FF80
     ld a,[lvl2_score]
-    cp $02
+    cp $1E
     jp z,LEVEL2_END_ANIM
     ld a,[lvl2_lives]
     cp $00
@@ -47,6 +45,9 @@ LEVEL2_LOOP::
     jp LEVEL2_LOOP
 
 LEVEL2_END_ANIM::
+    ld hl,rOBP0
+    ld d,$0F
+    call FADE_OUT_INV
     ld a,$F0
     ld [sprite_0],a
     ld [sprite_0+1],a
@@ -77,42 +78,35 @@ LEVEL2_END_ANIM_LOOP::
     ld [lvl2_anim_planet_delay],a
     cp $00
     jp nz,LEVEL2_END_ANIM_LOOP
-    ld a,[sprite_9]
-    cp $0F
-    jp z,LVL2_GOTO_LEVEL3
+    ld a,[rSCY]
+    cp $E0
+    jp z,LVL2_FADE_OUT
     ld b,$00
     ld d,$00
     ld e,$04
     ld hl,sprite_9
     call LVL2_UPDATE_SPRITES_PLANET
+    ld a,[rSCY]
+    sub $01
+    ld [rSCY],a
     ld a,$0F
     ld [lvl2_anim_planet_delay],a
     jp LEVEL2_END_ANIM_LOOP
 
-LVL2_GOTO_LEVEL3::
-    ld hl,rBGP
-    ld d,$0F
-    call FADE_OUT
-    ld hl,rOBP0
-    ld d,$0F
-    call FADE_OUT
-    nop
-    halt
-
 LVL2_INIT_PLANET::
-    ld b,$EF
+    ld b,$F0
     ld c,$38
     ld d,$31
     ld e,$08
     ld hl,sprite_9
     call LVL2_PLANET_ROW_INIT
-    ld b,$F7
+    ld b,$F8
     ld c,$38
     ld d,$29
     ld e,$08
     ld hl,sprite_17
     call LVL2_PLANET_ROW_INIT
-    ld b,$FF
+    ld b,$00
     ld c,$40
     ld d,$23
     ld e,$06
@@ -157,7 +151,40 @@ LVL2_UPDATE_SPRITES_PLANET::
     ret
 
 LEVEL2_RESTART::
-    jp LEVEL2
+    jp LVL1_GOTO_LEVEL2
+    ret
+
+LVL2_FADE_OUT::
+    ld a,[rSCY]
+    cp $E0
+    jp nz,LVL2_RET
+    ld a,%00010110
+    ld [rBGP],a
+    ld [rOBP0],a
+    ld c,$0F
+    call WAIT
+    ld a,%00000101
+	ld	[rBGP],a
+    ld	[rOBP0],a
+    ld c,$0F
+    call WAIT
+    ld a,%00000001
+	ld	[rBGP],a
+    ld	[rOBP0],a
+    ld c,$0F
+    call WAIT
+    ld a,%00000000
+	ld	[rBGP],a
+    ld	[rOBP0],a
+    ld c,$0F
+    call WAIT
+    jp LVL2_GOTO_LEVEL3
+
+LVL2_GOTO_LEVEL3::    
+    nop
+    halt
+
+LVL2_RET::
     ret
 
 LVL2_LOAD_MAP::
@@ -205,5 +232,15 @@ LVL2_LOAD_MAP::
     ld bc,64
     ld	de,$9A00
     ld	hl,LVL2_MAP_8
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9B80
+    ld	hl,LVL2_MAP_0
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9BC0
+    ld	hl,LVL2_MAP_0
     call LOAD_MAP
     ret

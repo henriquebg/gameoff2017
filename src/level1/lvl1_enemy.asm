@@ -1,11 +1,9 @@
 Section "Level1Enemy",ROM0
 
 LVL1_INIT_ENEMY::
-    ; ld b,%01111100
-    ; call RAND_NUM
     ld a,$50
     ld [sprite_3],a
-    ld a,$B0
+    ld a,$FF
     ld [sprite_3+1],a
     ld a,$0F
     ld [sprite_3+2],a
@@ -92,12 +90,12 @@ LVL1_RESET_ENEMY::
     ld b,%00111000
     call RAND_NUM
     ld [sprite_3],a
-    ld a,$B0
+    ld a,$FF
     ld [sprite_3+1],a
     ld b,%00000001
     call RAND_NUM
     ld [lvl1_enemy_direction],a
-    
+
     ld a,[lvl1_score]
     cp $01
     jp z,LVL1_ENEMY1
@@ -111,6 +109,7 @@ LVL1_RESET_ENEMY::
     jp z,LVL1_GOTO_LEVEL2
     ret
 
+;Level 2 uses this procedure for restarting, so it uses some Level 2's variables
 LVL1_GOTO_LEVEL2::   
     ld a,$F0
     ld [sprite_2],a
@@ -129,9 +128,18 @@ LVL1_GOTO_LEVEL2::
     call FADE_OUT
     ld a,$00
     ld [rSCX],a
-    
+
+    ld a,$F0
+    ld [lvl2_enemy_0_x],a
+    ld [lvl2_enemy_0_y],a
+    ld [lvl2_enemy_1_x],a
+    ld [lvl2_enemy_1_y],a
+    ld a,$F0
     ld [sprite_0],a
-    ld [sprite_1],a
+    ld a,$F0
+    ld [sprite_0+1],a
+    call LVL2_UPDATE_ENEMY_0_POSITION
+    call LVL2_UPDATE_ENEMY_1_POSITION
     call WAIT_VBLANK
     call $FF80
 
@@ -157,9 +165,9 @@ LVL1_ENEMY1::
     ld a,$00
     ld [lvl1_enemy_delay],a
     ld [lvl1_enemy_speed_delay],a
-    ld a,$02
-    ld [lvl1_enemy_speed_x],a
     ld a,$01
+    ld [lvl1_enemy_speed_x],a
+    ld a,$02
     ld [lvl1_enemy_speed_y],a
     ld a,$03
     ld [lvl1_scroll_speed],a
@@ -173,8 +181,6 @@ LVL1_ENEMY2::
     ld [lvl1_enemy_speed_x],a
     ld a,$03
     ld [lvl1_enemy_speed_y],a
-    ld a,$02
-    ld [lvl1_speed_character],a
     ld a,$02
     ld [lvl1_scroll_speed],a
     ld a,$05
@@ -193,6 +199,8 @@ LVL1_ENEMY3::
     ld [lvl1_scroll_speed],a
     ld a,$01
     ld [lvl1_plot_twist],a
+    ld a,$02
+    ld [lvl1_speed_character],a
     ret
 
 LVL1_ENEMY4::
