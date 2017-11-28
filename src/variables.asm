@@ -58,6 +58,12 @@ lvl2_enemy_1_change_speed   DB
 ;Character variables
 lvl2_is_shooting            DB
 
+;General variables
+lvl2_score                  DB
+lvl2_lives                  DB
+lvl2_enemies_active         DB
+lvl2_anim_planet_delay      DB
+
 SECTION "OAM Vars",WRAM0[$C100]
 
 sprite_0:  DS 4
@@ -70,6 +76,27 @@ sprite_6:  DS 4
 sprite_7:  DS 4
 sprite_8:  DS 4
 sprite_9:  DS 4
+sprite_10:  DS 4
+sprite_11:  DS 4
+sprite_12:  DS 4
+sprite_13:  DS 4
+sprite_14:  DS 4
+sprite_15:  DS 4
+sprite_16:  DS 4
+sprite_17:  DS 4
+sprite_18:  DS 4
+sprite_19:  DS 4
+sprite_20:  DS 4
+sprite_21:  DS 4
+sprite_22:  DS 4
+sprite_23:  DS 4
+sprite_24:  DS 4
+sprite_25:  DS 4
+sprite_26:  DS 4
+sprite_27:  DS 4
+sprite_28:  DS 4
+sprite_29:  DS 4
+sprite_30:  DS 4
 
 ; sprite_character: DS 4
 

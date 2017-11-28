@@ -133,7 +133,7 @@ LVL2_ENEMY_0_DAMAGE::
     call FADE_IN
     ld a,%00100111
     ld [rBGP],a
-    ld a,$FF
+    ld a,$F0
     ld [lvl2_enemy_0_x],a
     ld [lvl2_enemy_0_y],a
     ld a,$00
@@ -142,11 +142,14 @@ LVL2_ENEMY_0_DAMAGE::
     ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
+    ld a,[lvl2_lives]
+    dec a
+    ld [lvl2_lives],a
     call LVL2_UPDATE_ENEMY_0_POSITION
     ret
 
 LVL2_KILL_ENEMY_0::
-    ld a,$FF
+    ld a,$F0
     ld [lvl2_enemy_0_x],a
     ld [lvl2_enemy_0_y],a
     ld a,$00
@@ -155,5 +158,8 @@ LVL2_KILL_ENEMY_0::
     ld b,%01111111
     call RAND_NUM
     ld [lvl2_enemy_0_spawn_delay],a
+    ld a,[lvl2_score]
+    inc a
+    ld [lvl2_score],a
     call LVL2_UPDATE_ENEMY_0_POSITION
     ret

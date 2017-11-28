@@ -36,7 +36,7 @@ START::
     ;Load sprite tiles for Splash Screen, Level 1 and Level 2
     ld	hl,SPRITES
 	ld	de,$8000
-	ld	bc,816
+	ld	bc,912
     call LOAD_TILES
 
     ;Load background tiles for Splash Screen, Level 1 and Level 2
@@ -76,8 +76,8 @@ START::
     ei
 
 BEGIN_GAME::
-    call INIT_SPLASH
-    call SPLASH_SCREEN
+    ; call INIT_SPLASH
+    ; call SPLASH_SCREEN
     call LEVEL2
     nop
     halt

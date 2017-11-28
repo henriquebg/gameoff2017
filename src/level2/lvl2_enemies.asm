@@ -21,7 +21,10 @@ LVL2_INIT_ENEMIES::
     call LVL2_UPDATE_ENEMY_1_POSITION
     ret
 
-LVL2_UPDATE_ENEMIES:: 
+LVL2_UPDATE_ENEMIES::
+    ld a,[lvl2_enemies_active]
+    cp $01
+    jp nz,LVL2_ENEMY_END
     call LVL2_UPDATE_ENEMY_0
     call LVL2_UPDATE_ENEMY_1
     ret
