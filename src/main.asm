@@ -15,6 +15,11 @@ INCLUDE "level2/lvl2_enemies.asm"
 INCLUDE "level2/lvl2_enemy_0.asm"
 INCLUDE "level2/lvl2_enemy_1.asm"
 INCLUDE "level2/lvl2_background_animation.asm"
+INCLUDE "level3/lvl3_main.asm"
+INCLUDE "level3/lvl3_character.asm"
+INCLUDE "level3/lvl3_shot.asm"
+;INCLUDE "level3/lvl3_enemy.asm"
+INCLUDE "level3/lvl3_boss.asm"
 
 ;****************************************************************************************************************************************************
 ;*	Program Start
@@ -76,9 +81,9 @@ START::
     ei
 
 BEGIN_GAME::
-    call INIT_SPLASH
-    call SPLASH_SCREEN
-    call LEVEL1
+    ; call INIT_SPLASH
+    ; call SPLASH_SCREEN
+    call LEVEL3
     nop
     halt
     jp BEGIN_GAME

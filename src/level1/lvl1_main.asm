@@ -43,19 +43,18 @@ LEVEL1_LOOP::
     call LVL1_UPDATE_CHAR
     call LVL1_UPDATE_SHOT
     call LVL1_UPDATE_ENEMY
-    call SCROLL_BACKGROUND
-    nop
+    call LVL1_SCROLL_BACKGROUND
     jp LEVEL1_LOOP
 
-SCROLL_BACKGROUND::
+LVL1_SCROLL_BACKGROUND::
     ld a,[lvl1_scroll_delay]
     cp $00
-    jp z,SCROLL_BG
+    jp z,LVL1_SCROLL_BG
     dec a
     ld [lvl1_scroll_delay],a
     ret
 
-SCROLL_BG::
+LVL1_SCROLL_BG::
     ld a,[rSCX]
     inc a
     ld [rSCX],a

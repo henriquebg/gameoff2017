@@ -178,11 +178,7 @@ LVL2_FADE_OUT::
     ld	[rOBP0],a
     ld c,$0F
     call WAIT
-    jp LVL2_GOTO_LEVEL3
-
-LVL2_GOTO_LEVEL3::    
-    nop
-    halt
+    jp LEVEL3
 
 LVL2_RET::
     ret

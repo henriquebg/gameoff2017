@@ -64,6 +64,21 @@ lvl2_lives                  DB
 lvl2_enemies_active         DB
 lvl2_anim_planet_delay      DB
 
+;Level 3 variables
+lvl3_is_shooting            DB
+lvl3_score                  DB
+lvl3_scroll_delay           DB
+lvl3_scroll_speed           DB
+lvl3_speed_character        DB
+lvl3_speed_shot             DB
+lvl3_plot_twist             DB
+lvl3_boss_x                 DB
+lvl3_boss_y                 DB
+lvl3_boss_direction         DB
+lvl3_boss_delay             DB
+lvl3_boss_speed_delay       DB
+lvl3_boss_speed_y           DB
+
 SECTION "OAM Vars",WRAM0[$C100]
 
 sprite_0:  DS 4
