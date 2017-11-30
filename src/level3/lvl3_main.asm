@@ -1,15 +1,18 @@
 Section "Level3",ROM0
 
 LEVEL3::
-    ld a,%11111111
-    ld [rOBP0],a
-    ld  a,%11001011
-    ld [rLCDC],a
-    
+    call LVL3_LOAD_MAP
     call LVL3_INIT_CHARACTER
     call LVL3_INIT_SHOT
     call LVL3_INIT_BOSS
     call LVL3_INIT_BOSS_SHOT
+
+    ld a,$F0
+    ld [rSCX],a
+    ld a,%11111111
+    ld [rOBP0],a
+    ld a,%11001011
+    ld [rLCDC],a
 
     ld a,$00
     ld [lvl3_score],a
@@ -45,7 +48,7 @@ LVL3_ANIM_BEGIN::
     call LVL3_UPDATE_BOSS_POSITION
     ld a,[rSCX]
     cp $60
-    jp c,LVL3_ANIM_BEGIN
+    jp nz,LVL3_ANIM_BEGIN
     ld c,$80
     call WAIT
     jp LEVEL3_LOOP
@@ -77,6 +80,9 @@ LVL3_SCROLL_BG::
     ld [rSCX],a
     ld a,[lvl3_scroll_speed]
     ld [lvl3_scroll_delay],a
+    ld a,[rSCX]
+    cp $F0
+    jp nc,LVL3_SCROLL_END
     ld a,[lvl3_boss_x]
     dec a
     ld [lvl3_boss_x],a
@@ -201,3 +207,51 @@ LEVEL3_END::
     call FADE_OUT
     nop
     halt
+
+LVL3_LOAD_MAP::
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9C00
+    ld	hl,LVL3_MAP_0
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9C40
+    ld	hl,LVL3_MAP_1
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9C80
+    ld	hl,LVL3_MAP_2
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9CC0
+    ld	hl,LVL3_MAP_3
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9D00
+    ld	hl,LVL3_MAP_4
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9D40
+    ld	hl,LVL3_MAP_5
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9D80
+    ld	hl,LVL3_MAP_6
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9DC0
+    ld	hl,LVL3_MAP_7
+    call LOAD_MAP
+    call WAIT_VBLANK
+    ld bc,64
+    ld	de,$9E00
+    ld	hl,LVL3_MAP_8
+    call LOAD_MAP
+    ret

@@ -78,6 +78,10 @@ LVL3_SHOT_CHAR_COLLISION::
     ld hl,rOBP0
     call FADE_OUT
 
+    ld d,$0F
+    ld hl,rOBP1
+    call FADE_OUT
+
     ld a,$F0
     ld [sprite_0],a
     ld [sprite_1],a

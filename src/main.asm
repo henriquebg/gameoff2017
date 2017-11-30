@@ -48,7 +48,7 @@ START::
     ;Load background tiles for Splash Screen, Level 1 and Level 2
     ld	hl,TILES
 	ld	de,$8800
-	ld	bc,2912
+	ld	bc,3760
     call LOAD_TILES
 
     ;Load maps for Splash Screen and Level 1

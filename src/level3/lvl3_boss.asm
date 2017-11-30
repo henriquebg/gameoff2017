@@ -177,6 +177,9 @@ LVL3_BOSS_SHOT_SPEED_INC::
     ld a,[lvl3_speed_boss_shot]
     inc a
     ld [lvl3_speed_boss_shot],a
+    ld a,[lvl3_boss_anim_speed]
+    dec a
+    ld [lvl3_boss_anim_speed],a
     ret
 
 LVL3_BOSS_END::
