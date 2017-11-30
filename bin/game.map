@@ -26,39 +26,39 @@ ROM Bank #0 (HOME):
   SECTION: $0060-$00F8 ($0099 bytes) ["Joypad IRQ Vector"]
            $0060 = JOYPAD_VECT
   SECTION: $0100-$014B ($004C bytes) ["Start"]
-  SECTION: $25CC-$2758 ($018D bytes) ["Utilitaries"]
-           $2616 = COPY_DATA
-           $26B9 = JOY_FALSE
-           $26C0 = WAIT_LOOP_INT
-           $26BE = WAIT_LOOP_EXT1
-           $26BC = WAIT_LOOP_EXT2
-           $26BC = WAIT
-           $25F1 = CLEAR_RAM
-           $25CC = WAIT_VBLANK
-           $26F0 = FADE_OUT
-           $26CF = FADE_IN
-           $2639 = READ_JOYPAD
-           $26AF = JOY_START
-           $2691 = JOY_A
-           $267D = JOY_UP
-           $2687 = JOY_DOWN
-           $2669 = JOY_RIGHT
-           $2673 = JOY_LEFT
-           $274C = RAND_NUM
-           $2711 = FADE_IN_INV
-           $2732 = FADE_OUT_INV
-           $2630 = LOAD_MAP
-           $2627 = LOAD_TILES
-           $25D3 = CLEAR_MAP
-           $25E2 = CLEAR_OAM
-           $2600 = DMA_COPY
-           $269B = JOY_B
-           $25E8 = CLEAR_OAM_LOOP
-           $26A5 = JOY_SELECT
-           $261C = COPY_DATA_LOOP
-           $2630 = LOAD_MAP_LOOP
-           $25DB = CLEAR_MAP_LOOP
-           $25F7 = CLEAR_RAM_LOOP
+  SECTION: $2628-$27B4 ($018D bytes) ["Utilitaries"]
+           $2672 = COPY_DATA
+           $2715 = JOY_FALSE
+           $271C = WAIT_LOOP_INT
+           $271A = WAIT_LOOP_EXT1
+           $2718 = WAIT_LOOP_EXT2
+           $2718 = WAIT
+           $264D = CLEAR_RAM
+           $2628 = WAIT_VBLANK
+           $274C = FADE_OUT
+           $272B = FADE_IN
+           $2695 = READ_JOYPAD
+           $270B = JOY_START
+           $26ED = JOY_A
+           $26D9 = JOY_UP
+           $26E3 = JOY_DOWN
+           $26C5 = JOY_RIGHT
+           $26CF = JOY_LEFT
+           $27A8 = RAND_NUM
+           $276D = FADE_IN_INV
+           $278E = FADE_OUT_INV
+           $268C = LOAD_MAP
+           $2683 = LOAD_TILES
+           $262F = CLEAR_MAP
+           $263E = CLEAR_OAM
+           $265C = DMA_COPY
+           $26F7 = JOY_B
+           $2644 = CLEAR_OAM_LOOP
+           $2701 = JOY_SELECT
+           $2678 = COPY_DATA_LOOP
+           $268C = LOAD_MAP_LOOP
+           $2637 = CLEAR_MAP_LOOP
+           $2653 = CLEAR_RAM_LOOP
   SECTION: $100D-$1A8C ($0A80 bytes) ["Background Map"]
            $180D = LVL2_MAP_0
            $184D = LVL2_MAP_1
@@ -72,7 +72,7 @@ ROM Bank #0 (HOME):
            $100D = SPLASH_MAP
            $140D = LVL1_MAP
            $1A4D = WINDOWMAP
-  SECTION: $1A8D-$1E1C ($0390 bytes) ["Sprite Tiles"]
+  SECTION: $1A8D-$1F0C ($0480 bytes) ["Sprite Tiles"]
            $1A8D = SPRITES
   SECTION: $01AD-$100C ($0E60 bytes) ["Background Tiles"]
            $0D0D = LVL2_BG0_0
@@ -88,153 +88,170 @@ ROM Bank #0 (HOME):
            $0F8D = LVL2_BG3_1
            $0FCD = LVL2_BG3_2
            $01AD = TILES
-  SECTION: $2434-$25CB ($0198 bytes) ["SplashScreen"]
-           $2505 = SPLASH_SCROLL_END
-           $24ED = SPLASH_SCREEN
-           $2586 = EXIT_SPLASH
-           $2539 = CHANGE_PRESS_START
-           $251B = SPLASH_WAIT
-           $2553 = PRESS_START_COLOUR_0
-           $2564 = PRESS_START_COLOUR_1
-           $2575 = PRESS_START_COLOUR_2
-           $2434 = INIT_SPLASH
-  SECTION: $2C7B-$2D79 ($00FF bytes) ["Level1"]
-           $2CBC = LEVEL1_LOOP
-           $2CD4 = LVL1_SCROLL_BACKGROUND
-           $2CE1 = LVL1_SCROLL_BG
-           $2C7B = LEVEL1
-           $2CED = LEVEL3
-           $2D2E = LVL3_ANIM_BEGIN
-           $2D59 = LVL3_SCROLL_BACKGROUND
-           $2D44 = LEVEL3_LOOP
-           $2D66 = LVL3_SCROLL_BG
-           $2D79 = LVL3_SCROLL_END
-  SECTION: $1E1D-$2078 ($025C bytes) ["Level1Character"]
-           $1E1D = LVL1_INIT_CHARACTER
-           $1E4B = LVL1_UPDATE_CHAR
-           $1EF0 = LVL1_CHARACTER_ENEMY_COLLISION
-           $1E66 = LVL1_CHECK_UP
-           $1E8A = LVL1_CHECK_DOWN
-           $1EAE = LVL1_CHECK_RIGHT
-           $1ECF = LVL1_CHECK_LEFT
-           $1F4A = LVL1_END_CHAR
-           $1F4B = LVL3_INIT_CHARACTER
-           $1F79 = LVL3_UPDATE_CHAR
-           $201E = LVL3_CHARACTER_ENEMY_COLLISION
-           $1F94 = LVL3_CHECK_UP
-           $1FB8 = LVL3_CHECK_DOWN
-           $1FDC = LVL3_CHECK_RIGHT
-           $1FFD = LVL3_CHECK_LEFT
-           $2078 = LVL3_END_CHAR
-  SECTION: $2759-$28C7 ($016F bytes) ["Shot"]
-           $2759 = LVL1_INIT_SHOT
-           $278B = LVL1_UPDATE_SHOT
-           $2778 = LVL1_ACTIVATE_SHOT
-           $2839 = LVL1_SHOT_END
-           $2797 = LVL1_MOVE_RIGHT
-           $282E = LVL1_RESET_SHOT
-           $27AE = LVL1_SHOT_ENEMY_COLLISION_1
-           $27EC = LVL1_SHOT_ENEMY_COLLISION_2
-           $283A = LVL3_INIT_SHOT
-           $286C = LVL3_UPDATE_SHOT
-           $2859 = LVL3_ACTIVATE_SHOT
-           $28C7 = LVL3_SHOT_END
-           $2878 = LVL3_MOVE_RIGHT
-           $28BC = LVL3_RESET_SHOT
-           $288F = LVL3_SHOT_BOSS_COLLISION
-  SECTION: $2278-$2433 ($01BC bytes) ["Level1Enemy"]
-           $2278 = LVL1_INIT_ENEMY
-           $229D = LVL1_UPDATE_ENEMY
-           $2325 = LVL1_RESET_ENEMY
-           $23A5 = LVL1_ENEMY0
-           $22CD = LVL1_MOVE_ENEMY
-           $22BD = LVL1_ENEMY_DIRECTION_UP
-           $22C5 = LVL1_ENEMY_DIRECTION_DOWN
-           $22DB = LVL1_MOVE_ENEMY_DOWN
-           $2300 = LVL1_MOVE_ENEMY_UP
-           $242C = LVL1_ENEMY_END
-           $23B8 = LVL1_ENEMY1
-           $23D0 = LVL1_ENEMY2
-           $23ED = LVL1_ENEMY3
-           $240F = LVL1_ENEMY4
-           $2357 = LVL1_GOTO_LEVEL2
-  SECTION: $2079-$2277 ($01FF bytes) ["Level2"]
-           $2079 = LEVEL2
-           $21D2 = LVL2_LOAD_MAP
-           $20B4 = LEVEL2_LOOP
-           $20DA = LEVEL2_END_ANIM
-           $2197 = LEVEL2_RESTART
-           $2149 = LVL2_INIT_PLANET
-           $2113 = LEVEL2_END_ANIM_LOOP
-           $219B = LVL2_FADE_OUT
-           $218A = LVL2_UPDATE_SPRITES_PLANET
-           $2174 = LVL2_PLANET_ROW_INIT
-           $21D1 = LVL2_RET
-  SECTION: $2D7A-$2E73 ($00FA bytes) ["Level2Character"]
-           $2D7A = LVL2_INIT_CHARACTER
-           $2D99 = LVL2_UPDATE_CHARACTER
-           $2E05 = LVL2_CHECK_UP
-           $2DB1 = LVL2_SHOT
-           $2DDB = LVL2_CHECK_ENEMY_1_COLLISION
-           $2E73 = LVL2_END_CHARACTER
-           $2E22 = LVL2_CHECK_DOWN
-           $2E3F = LVL2_CHECK_RIGHT
-           $2E59 = LVL2_CHECK_LEFT
-           $2DB1 = LVL2_CHECK_ENEMY_0_COLLISION
-  SECTION: $2F50-$2F97 ($0048 bytes) ["Level2Enemies"]
-           $2F50 = LVL2_INIT_ENEMIES
-           $2F88 = LVL2_UPDATE_ENEMIES
-           $2F97 = LVL2_ENEMY_END
-  SECTION: $28C8-$2A19 ($0152 bytes) ["Level2Enemy0"]
-           $2978 = LVL2_UPDATE_ENEMY_0_POSITION
-           $29E7 = LVL2_KILL_ENEMY_0
-           $28C8 = LVL2_INIT_ENEMY_0
-           $2918 = LVL2_UPDATE_ENEMY_0
-           $28C8 = LVL_2_ENEMY_0_LOOP_POS_Y
-           $28DA = LVL_2_ENEMY_0_LOOP_POS_X
-           $2924 = LVL2_UPDATE_ENEMY_0_SPRITE
-           $299B = LVL2_ENEMY_0_SPAWN
-           $2934 = LVL2_CHANGE_ENEMY_0_SPRITE
-           $29B0 = LVL2_ENEMY_0_DAMAGE
-           $296C = LVL2_MOVE_ENEMY_0
-  SECTION: $2A1A-$2B6B ($0152 bytes) ["Level2Enemy1"]
-           $2ACA = LVL2_UPDATE_ENEMY_1_POSITION
-           $2B39 = LVL2_KILL_ENEMY_1
-           $2A1A = LVL2_INIT_ENEMY_1
-           $2A6A = LVL2_UPDATE_ENEMY_1
-           $2A1A = LVL_2_ENEMY_1_LOOP_POS_Y
-           $2A2C = LVL_2_ENEMY_1_LOOP_POS_X
-           $2A76 = LVL2_UPDATE_ENEMY_1_SPRITE
-           $2AED = LVL2_ENEMY_1_SPAWN
-           $2A86 = LVL2_CHANGE_ENEMY_1_SPRITE
-           $2B02 = LVL2_ENEMY_1_DAMAGE
-           $2ABE = LVL2_MOVE_ENEMY_1
-  SECTION: $2B6C-$2C7A ($010F bytes) ["Level2Background Animation"]
-           $2B6C = LVL2_INIT_BACKGROUND
-           $2B74 = LVL2_BACKGROUND_ANIMATE
-           $2B81 = LVL2_CHANGE_BG0
-           $2BBE = LVL2_CHANGE_BG1
-           $2BFB = LVL2_CHANGE_BG2
-           $2C38 = LVL2_CHANGE_BG3
-           $2C74 = LVL2_RESET
-  SECTION: $2E74-$2F4F ($00DC bytes) ["Level1Boss"]
-           $2E74 = LVL3_INIT_BOSS
-           $2EB7 = LVL3_UPDATE_BOSS_POSITION
-           $2EDA = LVL3_UPDATE_BOSS
-           $2F47 = LVL3_HIT_BOSS
-           $2EF5 = LVL3_BOSS_DIRECTION_UP
-           $2EFD = LVL3_BOSS_DIRECTION_DOWN
-           $2F05 = LVL3_MOVE_BOSS
-           $2F13 = LVL3_MOVE_BOSS_DOWN
-           $2F2D = LVL3_MOVE_BOSS_UP
-           $2F48 = LVL3_BOSS_END
+  SECTION: $2490-$2627 ($0198 bytes) ["SplashScreen"]
+           $2561 = SPLASH_SCROLL_END
+           $2549 = SPLASH_SCREEN
+           $25E2 = EXIT_SPLASH
+           $2595 = CHANGE_PRESS_START
+           $2577 = SPLASH_WAIT
+           $25AF = PRESS_START_COLOUR_0
+           $25C0 = PRESS_START_COLOUR_1
+           $25D1 = PRESS_START_COLOUR_2
+           $2490 = INIT_SPLASH
+  SECTION: $3255-$32C6 ($0072 bytes) ["Level1"]
+           $3296 = LEVEL1_LOOP
+           $32AE = LVL1_SCROLL_BACKGROUND
+           $32BB = LVL1_SCROLL_BG
+           $3255 = LEVEL1
+  SECTION: $2BC0-$2CED ($012E bytes) ["Level1Character"]
+           $2BC0 = LVL1_INIT_CHARACTER
+           $2BEE = LVL1_UPDATE_CHAR
+           $2C93 = LVL1_CHARACTER_ENEMY_COLLISION
+           $2C09 = LVL1_CHECK_UP
+           $2C2D = LVL1_CHECK_DOWN
+           $2C51 = LVL1_CHECK_RIGHT
+           $2C72 = LVL1_CHECK_LEFT
+           $2CED = LVL1_END_CHAR
+  SECTION: $3025-$3105 ($00E1 bytes) ["Shot"]
+           $3025 = LVL1_INIT_SHOT
+           $3057 = LVL1_UPDATE_SHOT
+           $3044 = LVL1_ACTIVATE_SHOT
+           $3105 = LVL1_SHOT_END
+           $3063 = LVL1_MOVE_RIGHT
+           $30FA = LVL1_RESET_SHOT
+           $307A = LVL1_SHOT_ENEMY_COLLISION_1
+           $30B8 = LVL1_SHOT_ENEMY_COLLISION_2
+  SECTION: $22D4-$248F ($01BC bytes) ["Level1Enemy"]
+           $22D4 = LVL1_INIT_ENEMY
+           $22F9 = LVL1_UPDATE_ENEMY
+           $2381 = LVL1_RESET_ENEMY
+           $2401 = LVL1_ENEMY0
+           $2329 = LVL1_MOVE_ENEMY
+           $2319 = LVL1_ENEMY_DIRECTION_UP
+           $2321 = LVL1_ENEMY_DIRECTION_DOWN
+           $2337 = LVL1_MOVE_ENEMY_DOWN
+           $235C = LVL1_MOVE_ENEMY_UP
+           $2488 = LVL1_ENEMY_END
+           $2414 = LVL1_ENEMY1
+           $242C = LVL1_ENEMY2
+           $2449 = LVL1_ENEMY3
+           $246B = LVL1_ENEMY4
+           $23B3 = LVL1_GOTO_LEVEL2
+  SECTION: $1F0D-$210B ($01FF bytes) ["Level2"]
+           $1F0D = LEVEL2
+           $2066 = LVL2_LOAD_MAP
+           $1F48 = LEVEL2_LOOP
+           $1F6E = LEVEL2_END_ANIM
+           $202B = LEVEL2_RESTART
+           $1FDD = LVL2_INIT_PLANET
+           $1FA7 = LEVEL2_END_ANIM_LOOP
+           $202F = LVL2_FADE_OUT
+           $201E = LVL2_UPDATE_SPRITES_PLANET
+           $2008 = LVL2_PLANET_ROW_INIT
+           $2065 = LVL2_RET
+  SECTION: $2F2B-$3024 ($00FA bytes) ["Level2Character"]
+           $2F2B = LVL2_INIT_CHARACTER
+           $2F4A = LVL2_UPDATE_CHARACTER
+           $2FB6 = LVL2_CHECK_UP
+           $2F62 = LVL2_SHOT
+           $2F8C = LVL2_CHECK_ENEMY_1_COLLISION
+           $3024 = LVL2_END_CHARACTER
+           $2FD3 = LVL2_CHECK_DOWN
+           $2FF0 = LVL2_CHECK_RIGHT
+           $300A = LVL2_CHECK_LEFT
+           $2F62 = LVL2_CHECK_ENEMY_0_COLLISION
+  SECTION: $32C7-$330E ($0048 bytes) ["Level2Enemies"]
+           $32C7 = LVL2_INIT_ENEMIES
+           $32FF = LVL2_UPDATE_ENEMIES
+           $330E = LVL2_ENEMY_END
+  SECTION: $291C-$2A6D ($0152 bytes) ["Level2Enemy0"]
+           $29CC = LVL2_UPDATE_ENEMY_0_POSITION
+           $2A3B = LVL2_KILL_ENEMY_0
+           $291C = LVL2_INIT_ENEMY_0
+           $296C = LVL2_UPDATE_ENEMY_0
+           $291C = LVL_2_ENEMY_0_LOOP_POS_Y
+           $292E = LVL_2_ENEMY_0_LOOP_POS_X
+           $2978 = LVL2_UPDATE_ENEMY_0_SPRITE
+           $29EF = LVL2_ENEMY_0_SPAWN
+           $2988 = LVL2_CHANGE_ENEMY_0_SPRITE
+           $2A04 = LVL2_ENEMY_0_DAMAGE
+           $29C0 = LVL2_MOVE_ENEMY_0
+  SECTION: $2A6E-$2BBF ($0152 bytes) ["Level2Enemy1"]
+           $2B1E = LVL2_UPDATE_ENEMY_1_POSITION
+           $2B8D = LVL2_KILL_ENEMY_1
+           $2A6E = LVL2_INIT_ENEMY_1
+           $2ABE = LVL2_UPDATE_ENEMY_1
+           $2A6E = LVL_2_ENEMY_1_LOOP_POS_Y
+           $2A80 = LVL_2_ENEMY_1_LOOP_POS_X
+           $2ACA = LVL2_UPDATE_ENEMY_1_SPRITE
+           $2B41 = LVL2_ENEMY_1_SPAWN
+           $2ADA = LVL2_CHANGE_ENEMY_1_SPRITE
+           $2B56 = LVL2_ENEMY_1_DAMAGE
+           $2B12 = LVL2_MOVE_ENEMY_1
+  SECTION: $2E1C-$2F2A ($010F bytes) ["Level2Background Animation"]
+           $2E1C = LVL2_INIT_BACKGROUND
+           $2E24 = LVL2_BACKGROUND_ANIMATE
+           $2E31 = LVL2_CHANGE_BG0
+           $2E6E = LVL2_CHANGE_BG1
+           $2EAB = LVL2_CHANGE_BG2
+           $2EE8 = LVL2_CHANGE_BG3
+           $2F24 = LVL2_RESET
+  SECTION: $210C-$22D3 ($01C8 bytes) ["Level3"]
+           $210C = LEVEL3
+           $2152 = LVL3_ANIM_BEGIN
+           $218D = LVL3_SCROLL_BACKGROUND
+           $216D = LEVEL3_LOOP
+           $21AE = LEVEL3_END
+           $219A = LVL3_SCROLL_BG
+           $21AD = LVL3_SCROLL_END
+  SECTION: $2CEE-$2E1B ($012E bytes) ["Level3Character"]
+           $2CEE = LVL3_INIT_CHARACTER
+           $2D1C = LVL3_UPDATE_CHAR
+           $2DC1 = LVL3_CHARACTER_ENEMY_COLLISION
+           $2D37 = LVL3_CHECK_UP
+           $2D5B = LVL3_CHECK_DOWN
+           $2D7F = LVL3_CHECK_RIGHT
+           $2DA0 = LVL3_CHECK_LEFT
+           $2E1B = LVL3_END_CHAR
+  SECTION: $31C7-$3254 ($008E bytes) ["Level3Shot"]
+           $31C7 = LVL3_INIT_SHOT
+           $31F9 = LVL3_UPDATE_SHOT
+           $31E6 = LVL3_ACTIVATE_SHOT
+           $3254 = LVL3_SHOT_END
+           $3205 = LVL3_MOVE_RIGHT
+           $3249 = LVL3_RESET_SHOT
+           $321C = LVL3_SHOT_BOSS_COLLISION
+  SECTION: $27B5-$291B ($0167 bytes) ["Level3Boss"]
+           $27B5 = LVL3_INIT_BOSS
+           $280C = LVL3_UPDATE_BOSS_POSITION
+           $282F = LVL3_UPDATE_BOSS
+           $28F5 = LVL3_HIT_BOSS
+           $283D = LVL3_BOSS_CHECK_SPRITE_DELAY
+           $2882 = LVL3_CHECK_BOSS_POSITION
+           $284D = LVL3_BOSS_CHANGE_SPRITE
+           $286F = LVL3_BOSS_RESET_ANIM
+           $289D = LVL3_BOSS_DIRECTION_UP
+           $28A5 = LVL3_BOSS_DIRECTION_DOWN
+           $28AD = LVL3_MOVE_BOSS
+           $28BB = LVL3_MOVE_BOSS_DOWN
+           $28D8 = LVL3_MOVE_BOSS_UP
+           $2914 = LVL3_BOSS_END
+           $290C = LVL3_BOSS_SHOT_SPEED_INC
+  SECTION: $3106-$31C6 ($00C1 bytes) ["Level3BossShot"]
+           $3106 = LVL3_INIT_BOSS_SHOT
+           $313B = LVL3_UPDATE_BOSS_SHOT
+           $3125 = LVL3_ACTIVATE_BOSS_SHOT
+           $3144 = LVL3_BOSS_SHOT_MOVE_LEFT
+           $31BB = LVL3_RESET_BOSS_SHOT
+           $315B = LVL3_SHOT_CHAR_COLLISION
+           $31C6 = LVL3_BOSS_SHOT_END
   SECTION: $0150-$01AC ($005D bytes) ["StartGame"]
            $0150 = START
            $01A4 = BEGIN_GAME
-    SLACK: $10B7 bytes
+    SLACK: $0D40 bytes
 
 WRAM Bank #0:
-  SECTION: $C000-$C036 ($0037 bytes) ["RAM Vars"]
+  SECTION: $C000-$C03C ($003D bytes) ["RAM Vars"]
            $C002 = joypad_down
            $C003 = joypad_pressed
            $C008 = seed_rand_num
@@ -276,15 +293,21 @@ WRAM Bank #0:
            $C02B = lvl3_score
            $C02D = lvl3_scroll_speed
            $C02C = lvl3_scroll_delay
+           $C037 = lvl3_boss_hits
            $C031 = lvl3_boss_x
+           $C032 = lvl3_boss_y
            $C02E = lvl3_speed_character
            $C02A = lvl3_is_shooting
            $C02F = lvl3_speed_shot
-           $C032 = lvl3_boss_y
            $C034 = lvl3_boss_delay
            $C035 = lvl3_boss_speed_delay
+           $C03A = lvl3_boss_anim_delay
+           $C03C = lvl3_boss_anim_set
+           $C03B = lvl3_boss_anim_speed
            $C036 = lvl3_boss_speed_y
            $C033 = lvl3_boss_direction
+           $C039 = lvl3_is_boss_shooting
+           $C038 = lvl3_speed_boss_shot
   SECTION: $C100-$C17B ($007C bytes) ["OAM Vars"]
            $C100 = sprite_0
            $C104 = sprite_1
@@ -298,7 +321,7 @@ WRAM Bank #0:
            $C124 = sprite_9
            $C144 = sprite_17
            $C164 = sprite_25
-    SLACK: $0F4D bytes
+    SLACK: $0F47 bytes
 
 WRAM Bank #1:
   EMPTY

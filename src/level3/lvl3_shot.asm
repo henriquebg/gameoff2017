@@ -1,4 +1,4 @@
-SECTION "Shot",ROM0
+SECTION "Level3Shot",ROM0
 
 LVL3_INIT_SHOT::
     ld a,$00

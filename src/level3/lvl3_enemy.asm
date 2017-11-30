@@ -1,4 +1,4 @@
-Section "Level1Enemy",ROM0
+Section "Level3Enemy",ROM0
 
 LVL3_INIT_ENEMY::
     ld a,$50

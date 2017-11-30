@@ -1,4 +1,4 @@
-SECTION "Level1Character",ROM0
+SECTION "Level3Character",ROM0
 
 LVL3_INIT_CHARACTER::
     ld a,$50

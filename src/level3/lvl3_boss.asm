@@ -1,4 +1,4 @@
-Section "Level1Boss",ROM0
+Section "Level3Boss",ROM0
 
 LVL3_INIT_BOSS::
     ld a,$50
@@ -6,21 +6,31 @@ LVL3_INIT_BOSS::
     ld a,$F0
     ld [lvl3_boss_x],a
     call LVL3_UPDATE_BOSS_POSITION
-    ld a,$0F
+    ld a,$3B
     ld [sprite_5+2],a
-    ld a,$0F
+    ld a,$39
     ld [sprite_6+2],a
-    ld a,$0F
+    ld a,$3C
     ld [sprite_7+2],a
-    ld a,$0F
+    ld a,$3A
     ld [sprite_8+2],a
-    ld a,$00
+    ld a,%00010000
     ld [sprite_5+3],a
     ld [sprite_6+3],a
     ld [sprite_7+3],a
     ld [sprite_8+3],a
+    ld a,%00100111
+    ld [rOBP1],a
+
+    ld a,$00
     ld [lvl3_boss_delay],a
     ld [lvl3_boss_speed_delay],a
+    ld [lvl3_boss_hits],a
+    ld [lvl3_boss_anim_delay],a
+    ld [lvl3_boss_anim_set],a
+
+    ld a,$05
+    ld [lvl3_boss_anim_speed],a
 
     ld a,$01
     ld [lvl3_boss_speed_y],a
@@ -47,15 +57,61 @@ LVL3_UPDATE_BOSS_POSITION::
     ret
 
 LVL3_UPDATE_BOSS::
+    call LVL3_BOSS_CHECK_SPRITE_DELAY
+    ld a,[lvl3_is_boss_shooting]
+    cp $00
+    jp z,LVL3_ACTIVATE_BOSS_SHOT
+    jp LVL3_CHECK_BOSS_POSITION
+
+LVL3_BOSS_CHECK_SPRITE_DELAY::
+    ld a,[lvl3_boss_anim_speed]
+    ld b,a
+    ld a,[lvl3_boss_anim_delay]
+    cp b
+    jp z,LVL3_BOSS_CHANGE_SPRITE
+    inc a
+    ld [lvl3_boss_anim_delay],a
+    ret
+
+LVL3_BOSS_CHANGE_SPRITE::
+    ld a,[lvl3_boss_anim_set]
+    cp $02
+    jp nc,LVL3_BOSS_RESET_ANIM
+    inc a
+    ld [lvl3_boss_anim_set],a
+
+    ld a,[sprite_5+2]
+    add a,$02
+    ld [sprite_5+2],a
+
+    ld a,[sprite_7+2]
+    add a,$02
+    ld [sprite_7+2],a
+
+    ld a,$00
+    ld [lvl3_boss_anim_delay],a
+    ret
+
+LVL3_BOSS_RESET_ANIM::
+    ld a,$3B
+    ld [sprite_5+2],a
+    ld a,$3C
+    ld [sprite_7+2],a
+    ld a,$00
+    ld [lvl3_boss_anim_set],a
+    ld [lvl3_boss_anim_delay],a
+    ret
+    
+LVL3_CHECK_BOSS_POSITION::
     ld a,[lvl3_boss_y]
-    sub $08
-    sub _LOWER_BORDER_OFFSET
-    cp $04
+    sub $04
+    sub _LOWER_BORDER
+    cp $01
     jp c,LVL3_BOSS_DIRECTION_UP
     ld a,[lvl3_boss_y]
-    add a,$08
+    add $04
     sub _UPPER_BORDER
-    cp $04
+    cp $01
     jp c,LVL3_BOSS_DIRECTION_DOWN
     jp LVL3_MOVE_BOSS
 
@@ -88,6 +144,7 @@ LVL3_MOVE_BOSS_DOWN::
     ld [lvl3_boss_y],a
     ld a,[lvl3_boss_speed_delay]
     ld [lvl3_boss_delay],a
+    call LVL3_UPDATE_BOSS_POSITION
     ret
 
 LVL3_MOVE_BOSS_UP::
@@ -101,9 +158,25 @@ LVL3_MOVE_BOSS_UP::
     ld [lvl3_boss_y],a
     ld a,[lvl3_boss_speed_delay]
     ld [lvl3_boss_delay],a
+    call LVL3_UPDATE_BOSS_POSITION
     ret
 
 LVL3_HIT_BOSS::
+    ld a,[lvl3_boss_hits]
+    inc a
+    ld [lvl3_boss_hits],a
+    cp $05
+    jp z,LVL3_BOSS_SHOT_SPEED_INC
+    cp $0A
+    jp z,LVL3_BOSS_SHOT_SPEED_INC
+    cp $0E
+    jp z,LVL3_BOSS_SHOT_SPEED_INC
+    ret
+
+LVL3_BOSS_SHOT_SPEED_INC::
+    ld a,[lvl3_speed_boss_shot]
+    inc a
+    ld [lvl3_speed_boss_shot],a
     ret
 
 LVL3_BOSS_END::

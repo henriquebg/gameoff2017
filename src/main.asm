@@ -20,6 +20,7 @@ INCLUDE "level3/lvl3_character.asm"
 INCLUDE "level3/lvl3_shot.asm"
 ;INCLUDE "level3/lvl3_enemy.asm"
 INCLUDE "level3/lvl3_boss.asm"
+INCLUDE "level3/lvl3_boss_shot.asm"
 
 ;****************************************************************************************************************************************************
 ;*	Program Start
@@ -41,7 +42,7 @@ START::
     ;Load sprite tiles for Splash Screen, Level 1 and Level 2
     ld	hl,SPRITES
 	ld	de,$8000
-	ld	bc,912
+	ld	bc,1152
     call LOAD_TILES
 
     ;Load background tiles for Splash Screen, Level 1 and Level 2

@@ -78,6 +78,12 @@ lvl3_boss_direction         DB
 lvl3_boss_delay             DB
 lvl3_boss_speed_delay       DB
 lvl3_boss_speed_y           DB
+lvl3_boss_hits              DB
+lvl3_speed_boss_shot        DB
+lvl3_is_boss_shooting       DB
+lvl3_boss_anim_delay        DB
+lvl3_boss_anim_speed        DB
+lvl3_boss_anim_set          DB
 
 SECTION "OAM Vars",WRAM0[$C100]
 
