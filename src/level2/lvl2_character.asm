@@ -1,14 +1,12 @@
 SECTION "Level2Character",ROM0
 
 LVL2_INIT_CHARACTER::
-    ld a,$40
-    ld [sprite_0],a
-    ld a,$50
-    ld [sprite_0+1],a
-    ld a,$10
-    ld [sprite_0+2],a
-    ld a,$00
-    ld [sprite_0+3],a
+    ld b,$40
+    ld c,$50
+    ld d,$10
+    ld e,$00
+    ld hl,sprite_0
+    call INIT_SPRITE
     ld a,$02
     ld [lvl2_speed_character],a
     ld a,$00
@@ -51,6 +49,7 @@ LVL2_CHECK_ENEMY_0_COLLISION::
 
 LVL2_CHECK_ENEMY_1_COLLISION::
     ld a,[sprite_0]
+    sub $04
     ld b,a
     ld a,[lvl2_enemy_1_y]
     sub $08
@@ -60,6 +59,7 @@ LVL2_CHECK_ENEMY_1_COLLISION::
     cp b
     jp c,LVL2_END_CHARACTER
     ld a,[sprite_0+1]
+    sub $04
     ld b,a
     ld a,[lvl2_enemy_1_x]
     sub $08

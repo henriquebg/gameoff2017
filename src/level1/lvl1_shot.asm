@@ -3,14 +3,12 @@ SECTION "Shot",ROM0
 LVL1_INIT_SHOT::
     ld a,$00
     ld [lvl1_is_shooting],a
-    ld a,$F0
-    ld [sprite_2],a
-    ld a,$0F
-    ld [sprite_2+1],a
-    ld a,$0E
-    ld [sprite_2+2],a
-    ld a,$00
-    ld [sprite_2+3],a
+    ld b,$F0
+    ld c,$0F
+    ld d,$0E
+    ld e,$00
+    ld hl,sprite_2
+    call INIT_SPRITE
     ld a,$04
     ld [lvl1_speed_shot],a
     ret

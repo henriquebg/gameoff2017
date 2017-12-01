@@ -3,14 +3,12 @@ SECTION "Level3BossShot",ROM0
 LVL3_INIT_BOSS_SHOT::
     ld a,$00
     ld [lvl3_is_boss_shooting],a
-    ld a,$F0
-    ld [sprite_4],a
-    ld a,$F0
-    ld [sprite_4+1],a
-    ld a,$0E
-    ld [sprite_4+2],a
-    ld a,%00100000
-    ld [sprite_4+3],a
+    ld b,$F0
+    ld c,$F0
+    ld d,$0E
+    ld e,%00100000
+    ld hl,sprite_4
+    call INIT_SPRITE
     ld a,$01
     ld [lvl3_speed_boss_shot],a
     ret

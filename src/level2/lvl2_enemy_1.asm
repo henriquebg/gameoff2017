@@ -163,7 +163,7 @@ LVL2_KILL_ENEMY_1::
     ld [lvl2_score],a
     call LVL2_UPDATE_ENEMY_1_POSITION
     ld a,[lvl2_enemies_change_speed]
-    cp $1C
+    cp $20
     jp c,LVL2_ENEMY_END
     sub $04
     ld [lvl2_enemies_change_speed],a

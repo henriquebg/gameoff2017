@@ -1,14 +1,12 @@
 Section "Level1Enemy",ROM0
 
 LVL1_INIT_ENEMY::
-    ld a,$50
-    ld [sprite_3],a
-    ld a,$FF
-    ld [sprite_3+1],a
-    ld a,$0F
-    ld [sprite_3+2],a
-    ld a,$00
-    ld [sprite_3+3],a
+    ld b,$50
+    ld c,$FF
+    ld d,$0F
+    ld e,$00
+    ld hl,sprite_3
+    call INIT_SPRITE
     ld b,%00000001
     call RAND_NUM
     ld [lvl1_enemy_direction],a
@@ -43,6 +41,9 @@ LVL1_ENEMY_DIRECTION_DOWN::
     jp LVL1_MOVE_ENEMY
 
 LVL1_MOVE_ENEMY::
+    ld a,[lvl1_enemy_delay]
+    cp $00
+    jp nz,LVL1_ENEMY_END
     ld a,[lvl1_enemy_direction]
     cp $00
     jp z,LVL1_MOVE_ENEMY_DOWN
@@ -51,9 +52,6 @@ LVL1_MOVE_ENEMY::
     ret
 
 LVL1_MOVE_ENEMY_DOWN::
-    ld a,[lvl1_enemy_delay]
-    cp $00
-    jp nz,LVL1_ENEMY_END
     ld a,[lvl1_enemy_speed_y]
     ld b,a
     ld a,[sprite_3]
@@ -69,9 +67,6 @@ LVL1_MOVE_ENEMY_DOWN::
     ret
 
 LVL1_MOVE_ENEMY_UP::
-    ld a,[lvl1_enemy_delay]
-    cp $00
-    jp nz,LVL1_ENEMY_END
     ld a,[lvl1_enemy_speed_y]
     ld b,a
     ld a,[sprite_3]

@@ -6,72 +6,59 @@ INIT_SPLASH::
 
     call CLEAR_RAM
 
-    ;Setting PRESS START sprites' position
-    ld a,$80
-    ld [sprite_0],a
-    ld [sprite_1],a
-    ld [sprite_2],a
-    ld [sprite_3],a
-    ld [sprite_4],a
-    ld [sprite_5],a
-    ld [sprite_6],a
-    ld [sprite_7],a
-    ld [sprite_8],a
-    ld [sprite_9],a
+    ld b,$80
+    ld e,$00
 
-    ld a,$2A
-    ld [sprite_0+1],a
-    ld a,$32
-    ld [sprite_1+1],a
-    ld a,$3A
-    ld [sprite_2+1],a
-    ld a,$42
-    ld [sprite_3+1],a
-    ld a,$4A
-    ld [sprite_4+1],a
-    ld a,$5A
-    ld [sprite_5+1],a
-    ld a,$62
-    ld [sprite_6+1],a
-    ld a,$6A
-    ld [sprite_7+1],a
-    ld a,$72
-    ld [sprite_8+1],a
-    ld a,$7A
-    ld [sprite_9+1],a
+    ld c,$2A
+    ld d,$00
+    ld hl,sprite_0
+    call INIT_SPRITE
 
-    ld a,$00
-    ld [sprite_0+2],a
-    ld a,$02
-    ld [sprite_1+2],a
-    ld a,$04
-    ld [sprite_2+2],a
-    ld a,$06
-    ld [sprite_3+2],a
-    ld a,$06
-    ld [sprite_4+2],a
-    ld a,$06
-    ld [sprite_5+2],a
-    ld a,$08
-    ld [sprite_6+2],a
-    ld a,$0A
-    ld [sprite_7+2],a
-    ld a,$02
-    ld [sprite_8+2],a
-    ld a,$08
-    ld [sprite_9+2],a
+    ld c,$32
+    ld d,$02
+    ld hl,sprite_1
+    call INIT_SPRITE
 
-    ld a,$00
-    ld [sprite_0+3],a
-    ld [sprite_1+3],a
-    ld [sprite_2+3],a
-    ld [sprite_3+3],a
-    ld [sprite_4+3],a
-    ld [sprite_5+3],a
-    ld [sprite_6+3],a
-    ld [sprite_7+3],a
-    ld [sprite_8+3],a
-    ld [sprite_9+3],a
+    ld c,$3A
+    ld d,$04
+    ld hl,sprite_2
+    call INIT_SPRITE
+
+    ld c,$42
+    ld d,$06
+    ld hl,sprite_3
+    call INIT_SPRITE
+
+    ld c,$4A
+    ld d,$06
+    ld hl,sprite_4
+    call INIT_SPRITE
+
+    ld c,$5A
+    ld d,$06
+    ld hl,sprite_5
+    call INIT_SPRITE
+
+    ld c,$62
+    ld d,$08
+    ld hl,sprite_6
+    call INIT_SPRITE
+
+    ld c,$6A
+    ld d,$0A
+    ld hl,sprite_7
+    call INIT_SPRITE
+
+    ld c,$72
+    ld d,$02
+    ld hl,sprite_8
+    call INIT_SPRITE
+
+    ld c,$7A
+    ld d,$08
+    ld hl,sprite_9
+    call INIT_SPRITE
+
     call $FF80
 
     ld a,$00

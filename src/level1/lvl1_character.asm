@@ -1,22 +1,18 @@
 SECTION "Level1Character",ROM0
 
 LVL1_INIT_CHARACTER::
-    ld a,$50
-    ld [sprite_0],a
-    ld a,$0F
-    ld [sprite_0+1],a
-    ld a,$0C
-    ld [sprite_0+2],a
-    ld a,$00
-    ld [sprite_0+3],a
-    ld a,$58
-    ld [sprite_1],a
-    ld a,$0F
-    ld [sprite_1+1],a
-    ld a,$0D
-    ld [sprite_1+2],a
-    ld a,$00
-    ld [sprite_1+3],a
+    ld b,$50
+    ld c,$0F
+    ld d,$0C
+    ld e,$00
+    ld hl,sprite_0
+    call INIT_SPRITE
+    ld b,$58
+    ld c,$0F
+    ld d,$0D
+    ld e,$00
+    ld hl,sprite_1
+    call INIT_SPRITE
     ld a,$01
     ld [lvl1_speed_character],a
     ret
@@ -26,11 +22,6 @@ LVL1_UPDATE_CHAR::
     ld  a,[joypad_down]
     call JOY_A
     jp  nz,LVL1_CHECK_UP
-
-    ; ;Refresh seed everytime A is pressed
-    ; ld a,[rDIV]
-    ; ld [seed_rand_num],a
-
     ld a,[lvl1_is_shooting]
     cp $01
     jp  z,LVL1_CHECK_UP

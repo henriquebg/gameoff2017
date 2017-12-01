@@ -57,13 +57,13 @@ START::
     ld	hl,SPLASH_MAP
     call LOAD_MAP
 
-    ld bc,1024
+    ld bc,720
     ld	de,_SCRN1
     ld	hl,LVL1_MAP
     call LOAD_MAP
 	
     ;Loading background and sprites palletes for Splash Screen
-    ld	a,%11100100	;load a normal palette up 11 10 01 00 - dark->light
+    ld	a,%00000000	;load a normal palette up 11 10 01 00 - dark->light
 	ld	[rBGP],a	;load the palette
 
     ld	a,%00100111	;load a normal palette up 11 10 01 00 - dark->light
@@ -73,20 +73,16 @@ START::
     ld  a,%11000001
     ld [rLCDC],a
 
-    ; ;Initialising seed with current divisor's value
-    ; ld a,[rDIV]
-    ; ld [seed_rand_num],a
-
     ;Copy DMA routine to High RAM for transferring sprites to OAM
     call DMA_COPY
     ei
 
 BEGIN_GAME::
-    ; call INIT_SPLASH
-    ; call SPLASH_SCREEN
-    call LEVEL3
-    nop
-    halt
-    jp BEGIN_GAME
+    call INIT_SPLASH
+    ld d,$1E
+    ld hl,rBGP
+    call FADE_IN
+    call SPLASH_SCREEN
+    jp LEVEL1
 
 

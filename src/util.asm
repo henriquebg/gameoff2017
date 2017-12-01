@@ -340,3 +340,19 @@ RAND_NUM::
   and b
   ld [seed_rand_num],a
   ret
+
+;b = y position
+;c = x position
+;d = sprite num
+;e = flags
+;hl = sprite address
+INIT_SPRITE::
+  ld a,b
+  ld [hl+],a
+  ld a,c
+  ld [hl+],a
+  ld a,d
+  ld [hl+],a
+  ld a,$00
+  ld [hl+],a
+  ret

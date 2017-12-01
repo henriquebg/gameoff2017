@@ -1,7 +1,19 @@
 Section "Level2",ROM0
 
 LEVEL2::
-    call LVL2_LOAD_MAP
+    call WAIT_VBLANK
+    ld	a,%00000000
+	ld	[rLCDC],a
+
+    ld bc,704
+    ld	de,_SCRN0
+    ld	hl,LVL2_MAP
+    call LOAD_MAP
+    ld bc,128
+    ld	de,$9B80
+    ld	hl,LVL2_MAP
+    call LOAD_MAP
+
     call LVL2_INIT_CHARACTER
     call LVL2_INIT_ENEMIES
     call LVL2_INIT_BACKGROUND
@@ -178,65 +190,10 @@ LVL2_FADE_OUT::
     ld	[rOBP0],a
     ld c,$0F
     call WAIT
+    call LVL2_INIT_PLANET
+    call WAIT_VBLANK
+    call $FF80
     jp LEVEL3
 
 LVL2_RET::
-    ret
-
-LVL2_LOAD_MAP::
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9800
-    ld	hl,LVL2_MAP_0
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9840
-    ld	hl,LVL2_MAP_1
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9880
-    ld	hl,LVL2_MAP_2
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$98C0
-    ld	hl,LVL2_MAP_3
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9900
-    ld	hl,LVL2_MAP_4
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9940
-    ld	hl,LVL2_MAP_5
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9980
-    ld	hl,LVL2_MAP_6
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$99C0
-    ld	hl,LVL2_MAP_7
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9A00
-    ld	hl,LVL2_MAP_8
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9B80
-    ld	hl,LVL2_MAP_0
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9BC0
-    ld	hl,LVL2_MAP_0
-    call LOAD_MAP
     ret

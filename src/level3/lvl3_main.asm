@@ -1,12 +1,22 @@
 Section "Level3",ROM0
 
 LEVEL3::
-    call LVL3_LOAD_MAP
+    call WAIT_VBLANK
+    ld	a,%00000000
+	ld	[rLCDC],a
+
+    ld bc,576
+    ld	de,_SCRN1
+    ld	hl,LVL3_MAP
+    call LOAD_MAP
+
     call LVL3_INIT_CHARACTER
     call LVL3_INIT_SHOT
     call LVL3_INIT_BOSS
     call LVL3_INIT_BOSS_SHOT
 
+    ld a,$00
+    ld [rSCY],a
     ld a,$F0
     ld [rSCX],a
     ld a,%11111111
@@ -60,7 +70,7 @@ LEVEL3_LOOP::
     call LVL3_UPDATE_CHAR
     call LVL3_UPDATE_SHOT
     ld a,[lvl3_boss_hits]
-    cp $01
+    cp $20
     jp z,LEVEL3_END
     call LVL3_UPDATE_BOSS
     call LVL3_UPDATE_BOSS_SHOT
@@ -118,32 +128,22 @@ LEVEL3_END::
     ld a,%00100111
     ld [rOBP1],a
 
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$3B
     ld [sprite_5+2],a
     ld a,$3C
     ld [sprite_7+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$3D
     ld [sprite_5+2],a
     ld a,$3E
     ld [sprite_7+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$3F
     ld [sprite_5+2],a
     ld a,$40
     ld [sprite_7+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$41
     ld [sprite_5+2],a
     ld a,$39
@@ -152,18 +152,7 @@ LEVEL3_END::
     ld [sprite_7+2],a
     ld a,$3A
     ld [sprite_8+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
-    ld a,$41
-    ld [sprite_5+2],a
-    ld a,$41
-    ld [sprite_7+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$F0
     ld [sprite_5],a
     ld [sprite_7],a
@@ -171,26 +160,17 @@ LEVEL3_END::
     ld [sprite_6+2],a
     ld a,$43
     ld [sprite_8+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$44
     ld [sprite_6+2],a
     ld a,$45
     ld [sprite_8+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$46
     ld [sprite_6+2],a
     ld a,$47
     ld [sprite_8+2],a
-    call WAIT_VBLANK
-    call $FF80
-    ld c,$0F
-    call WAIT
+    call LVL3_REPEAT_VBLANK_WAIT
     ld a,$F0
     ld [lvl3_boss_y],a
     ld [lvl3_boss_x],a
@@ -205,53 +185,50 @@ LEVEL3_END::
     ld d,$0F
     ld hl,rOBP0
     call FADE_OUT
-    nop
-    halt
+    ld a,$F0
+    ld [sprite_0],a
+    ld [sprite_1],a
 
-LVL3_LOAD_MAP::
     call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9C00
-    ld	hl,LVL3_MAP_0
+    call $FF80
+    ld  a,%00000000
+    ld [rLCDC],a
+    ld bc,680
+    ld	de,$8800
+    ld	hl,ENDING_TILES_1
     call LOAD_MAP
+    ld bc,680
+    ld	de,$8AA8
+    ld	hl,ENDING_TILES_2
+    call LOAD_MAP
+    ld bc,576
+    ld	de,_SCRN0
+    ld	hl,ENDING_MAP
+    call LOAD_MAP
+    ld a,%11000011
+    ld [rLCDC],a
+    ld a,$00
+    ld [rSCX],a
+    ld d,$1E
+    ld hl,rBGP
+    call FADE_IN
     call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9C40
-    ld	hl,LVL3_MAP_1
-    call LOAD_MAP
+ENDING_LOOP::
+    call READ_JOYPAD
+    ld  a,[joypad_pressed]
+    call JOY_START
+    jp z,LVL3_GOTO_START
+    jp ENDING_LOOP
+
+LVL3_GOTO_START::
+    ld d,$1E
+    ld hl,rBGP
+    call FADE_OUT
+    jp START
+
+LVL3_REPEAT_VBLANK_WAIT::
     call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9C80
-    ld	hl,LVL3_MAP_2
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9CC0
-    ld	hl,LVL3_MAP_3
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9D00
-    ld	hl,LVL3_MAP_4
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9D40
-    ld	hl,LVL3_MAP_5
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9D80
-    ld	hl,LVL3_MAP_6
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9DC0
-    ld	hl,LVL3_MAP_7
-    call LOAD_MAP
-    call WAIT_VBLANK
-    ld bc,64
-    ld	de,$9E00
-    ld	hl,LVL3_MAP_8
-    call LOAD_MAP
+    call $FF80
+    ld c,$0F
+    call WAIT
     ret
