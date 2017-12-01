@@ -18,7 +18,6 @@ INCLUDE "level2/lvl2_background_animation.asm"
 INCLUDE "level3/lvl3_main.asm"
 INCLUDE "level3/lvl3_character.asm"
 INCLUDE "level3/lvl3_shot.asm"
-;INCLUDE "level3/lvl3_enemy.asm"
 INCLUDE "level3/lvl3_boss.asm"
 INCLUDE "level3/lvl3_boss_shot.asm"
 
@@ -33,6 +32,7 @@ START::
 	call WAIT_VBLANK	;wait for v-blank
 
 	ld	a,%00000000
+    ld [rAUDENA],a  
 	ld	[rLCDC],a	;turn off LCD 
 
     call CLEAR_MAP

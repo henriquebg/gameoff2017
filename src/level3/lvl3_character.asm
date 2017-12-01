@@ -71,7 +71,7 @@ LVL3_CHECK_RIGHT::
     ld b,a
     ld a,[sprite_0+1]
     add a,b
-    cp _RIGHT_BORDER
+    cp $80
     jp nc,LVL3_CHECK_LEFT
     ld [sprite_0+1],a
     ld a,[sprite_1+1]

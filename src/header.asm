@@ -67,7 +67,7 @@ SECTION	"Start",ROM0[$100]
 	DB	$BB,$BB,$67,$63,$6E,$0E,$EC,$CC,$DD,$DC,$99,$9F,$BB,$B9,$33,$3E
 
 	; $0134-$013E (Game title - up to 11 upper case ASCII characters; pad with $00)
-	DB	"NAVINHA"
+	DB	"ALIEN CHASE"
 		;0123456789A
 
 	; $013F-$0142 (Product code - 4 ASCII characters, assigned by Nintendo, just leave blank)
@@ -78,7 +78,7 @@ SECTION	"Start",ROM0[$100]
 	DB GBC_UNSUPPORTED
 
 	; $0144 - $0145: "New" Licensee Code, a two character name.
-	DB "OK"
+	DB "  "
 
 	; $0146: Super Gameboy compatibility flag.
 	DB SGB_UNSUPPORTED
